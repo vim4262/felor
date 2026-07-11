@@ -7,8 +7,8 @@ window.SITE = {
   phoneDisplay: '+228 92 21 32 39',
   location: 'Lomé, Togo',
   school: 'ESIG Global Success',
-  linkedin: 'https://www.linkedin.com/in/ekoe-felicio',
-  github: 'https://github.com/ekoe-felicio',
+  linkedin: 'https://www.linkedin.com/in/felicio-ekoe-135634356',
+  github: 'https://github.com/vim4262',
   portfolioS3: 'https://sites.google.com/view/portfoliode2024-2025/accueil',
   // Clé Web3Forms — à remplacer par la tienne (voir instructions).
   // Récupère-la gratuitement sur https://web3forms.com avec ton Gmail.
