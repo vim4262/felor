@@ -3,7 +3,7 @@ window.SITE = {
   name: 'EKOE Félicio',
   ref: 'EKOE-S4-2026',
   email: 'felicioekoe3@gmail.com',
-  phone: '+22892213239',
+  phone: '+228092213239',
   phoneDisplay: '+228 92 21 32 39',
   location: 'Lomé, Togo',
   school: 'ESIG Global Success',
