@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin — Portfolio EKOE-S4</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@500;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles-variables.css">
+<link rel="stylesheet" href="styles-base.css">
+<link rel="stylesheet" href="styles-components.css">
+<link rel="stylesheet" href="styles-navigation.css">
+<link rel="stylesheet" href="styles-main.css">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js" defer></script>
+    <style>
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 32px;
+        }
+        .dashboard-header {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--line2);
+        }
+        .dashboard-nav {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+        .dashboard-nav button {
+            padding: 10px 20px;
+            background: var(--paper3);
+            border: 1px solid var(--line2);
+            color: var(--text);
+            font-family: var(--mono);
+            font-size: 12px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all .2s ease;
+        }
+        .dashboard-nav button:hover,
+        .dashboard-nav button.active {
+            background: var(--ink);
+            border-color: var(--ink);
+            color: #fff;
+        }
+        .admin-section {
+            display: none;
+        }
+        .admin-section.active {
+            display: block;
+        }
+        .admin-card {
+            background: var(--paper);
+            border: 1.5px solid var(--line2);
+            border-radius: 6px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .admin-card h3 {
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+        .form-group {
+            margin-bottom: 16px;
+        }
+        .form-group label {
+            display: block;
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--muted);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            background: var(--paper3);
+            border: 1px solid var(--line2);
+            border-radius: 4px;
+            color: var(--text);
+            font-family: var(--sans);
+            font-size: 14px;
+        }
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        .admin-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .btn-save {
+            background: var(--ink);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: var(--mono);
+            font-size: 12px;
+        }
+        .btn-cancel {
+            background: transparent;
+            color: var(--muted);
+            padding: 10px 20px;
+            border: 1px solid var(--line2);
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: var(--mono);
+            font-size: 12px;
+        }
+        .ue-list-item {
+            background: var(--paper3);
+            border: 1px solid var(--line2);
+            border-radius: 4px;
+            padding: 16px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all .2s ease;
+        }
+        .ue-list-item:hover {
+            border-color: var(--ink2);
+        }
+        .ue-list-item.active {
+            border-color: var(--accent);
+            background: rgba(45, 212, 191, 0.08);
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .stat-card {
+            background: var(--paper3);
+            border: 1px solid var(--line2);
+            border-radius: 6px;
+            padding: 20px;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="particles" aria-hidden="true"></canvas>
+
+<div class="case-bar">
+  <div class="wrap">
+    <span>Portfolio N° EKOE-S4-2026 <span class="blink">_</span></span>
+    <span>Dashboard Admin</span>
+  </div>
+</div>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">EKOE<span class="ref">/S4</span></a>
+    <div class="tab-row">
+      <a href="index.html" class="tab">Accueil</a>
+      <a href="competences.html" class="tab">Compétences</a>
+      <a href="projets.html" class="tab">Projets</a>
+      <a href="parcours.html" class="tab">Parcours</a>
+      <a href="contact.html" class="tab">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="nav-bottom-rule"></div>
+
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h1>Dashboard d'administration</h1>
+        <p class="cover-sub">Gérez et modifiez le contenu de votre portfolio S4</p>
+        <p style="margin-top:12px; padding:12px 16px; background:#fff3cd; border:1px solid #ffe08a; border-radius:6px; color:#7a5b00; font-size:14px;">
+          ⚠️ Page de démonstration locale sans authentification ni sauvegarde réelle (aucun backend connecté).
+          Elle n'est plus liée depuis la navigation publique du site et ne doit pas être déployée en production
+          sans ajouter un vrai mécanisme d'authentification.
+        </p>
+    </div>
+
+    <div class="dashboard-nav">
+        <button class="active" onclick="showSection('overview')">Vue d'ensemble</button>
+        <button onclick="showSection('ue')">Modifier les UE</button>
+        <button onclick="showSection('contact')">Infos contact</button>
+        <button onclick="showSection('stats')">Statistiques</button>
+    </div>
+
+    <!-- Section Vue d'ensemble -->
+    <div id="section-overview" class="admin-section active">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">11</div>
+                <div class="stat-label">Unités d'enseignement</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">30</div>
+                <div class="stat-label">Crédits totaux</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Pages du site</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">360h</div>
+                <div class="stat-label">Volume de formation</div>
+            </div>
+        </div>
+
+        <div class="admin-card">
+            <h3>Actions rapides</h3>
+            <div class="admin-actions">
+                <button class="btn-save" onclick="location.href='competences.html'">Voir les compétences</button>
+                <button class="btn-save" onclick="location.href='projets.html'">Voir les projets</button>
+                <button class="btn-save" onclick="location.href='parcours.html'">Voir le parcours</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Modification UE -->
+    <div id="section-ue" class="admin-section">
+        <div class="admin-card">
+            <h3>Sélectionnez une UE à modifier</h3>
+            <div id="ueList">
+                <div class="ue-list-item" onclick="editUE('INF1492')">
+                    <strong>INF 1492</strong> — Circuits numériques (4 cr)
+                </div>
+                <div class="ue-list-item" onclick="editUE('INF1491')">
+                    <strong>INF 1491</strong> — Cryptologie (3 cr)
+                </div>
+                <div class="ue-list-item" onclick="editUE('MTH1420')">
+                    <strong>MTH 1420</strong> — Rech. opér. & analyse num. (5 cr)
+                </div>
+                <div class="ue-list-item" onclick="editUE('INF1493')">
+                    <strong>INF 1493</strong> — Forensique & ing. sociale (2 cr)
+                </div>
+                <div class="ue-list-item" onclick="editUE('INF1423')">
+                    <strong>INF 1423</strong> — Algorithmique & SD (5 cr)
+                </div>
+                <div class="ue-list-item" onclick="editUE('INF1490')">
+                    <strong>INF 1490</strong> — Admin. systèmes d'exploitation (5 cr)
+                </div>
+                <div class="ue-list-item" onclick="editUE('RSI409')">
+                    <strong>RSI 409</strong> — Sécurité réseaux LAN (1.5 cr)
+                </div>
+                <div class="ue-list-item" onclick="editUE('RSI411')">
+                    <strong>RSI 411</strong> — Sécurisation services réseau (1.5 cr)
+                </div>
+                <div class="ue-list-item" onclick="editUE('SAESI401')">
+                    <strong>SAESI 401</strong> — SAE intégratrice (0.5 cr)
+                </div>
+                <div class="ue-list-item" onclick="editUE('STAGE')">
+                    <strong>Stage</strong> — Stage professionnel (2 cr)
+                </div>
+                <div class="ue-list-item" onclick="editUE('PORTSI4')">
+                    <strong>PORTSI 4</strong> — Portfolio numérique (0.5 cr)
+                </div>
+            </div>
+        </div>
+
+        <div id="ueEditor" class="admin-card" style="display: none;">
+            <h3>Modifier l'UE</h3>
+            <form id="ueForm">
+                <div class="form-group">
+                    <label>Code UE</label>
+                    <input type="text" id="ueCode" placeholder="Ex: INF 1492">
+                </div>
+                <div class="form-group">
+                    <label>Titre</label>
+                    <input type="text" id="ueTitle" placeholder="Titre de l'UE">
+                </div>
+                <div class="form-group">
+                    <label>Crédits</label>
+                    <input type="text" id="ueCredits" placeholder="Ex: 4">
+                </div>
+                <div class="form-group">
+                    <label>Description courte</label>
+                    <textarea id="ueDesc" placeholder="Description courte de l'UE"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Preuves</label>
+                    <input type="text" id="ueProof" placeholder="Ex: 4 crédits · TP réussi">
+                </div>
+                <div class="form-group">
+                    <label>Compétences acquises</label>
+                    <textarea id="ueSkills" placeholder="Liste des compétences acquises"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Bilan UE</label>
+                    <textarea id="ueBilan" placeholder="Votre bilan personnel de cette UE"></textarea>
+                </div>
+                <div class="admin-actions">
+                    <button type="button" class="btn-save" onclick="saveUE()">Enregistrer</button>
+                    <button type="button" class="btn-cancel" onclick="cancelUEEdit()">Annuler</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Section Contact -->
+    <div id="section-contact" class="admin-section">
+        <div class="admin-card">
+            <h3>Informations de contact</h3>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="adminEmail" placeholder="votre@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Téléphone</label>
+                    <input type="text" id="adminPhone" placeholder="+228 XX XX XX XX XX">
+                </div>
+                <div class="form-group">
+                    <label>LinkedIn</label>
+                    <input type="url" id="adminLinkedin" placeholder="https://linkedin.com/in/votre-profil">
+                </div>
+                <div class="form-group">
+                    <label>GitHub</label>
+                    <input type="url" id="adminGithub" placeholder="https://github.com/votre-profil">
+                </div>
+                <div class="admin-actions">
+                    <button type="button" class="btn-save" onclick="saveContact()">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Section Statistiques -->
+    <div id="section-stats" class="admin-section">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">11</div>
+                <div class="stat-label">Unités d'enseignement</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">30</div>
+                <div class="stat-label">Crédits totaux</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Pages du site</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">360h</div>
+                <div class="stat-label">Volume de formation</div>
+            </div>
+        </div>
+
+        <div class="admin-card">
+            <h3>Détails par UE</h3>
+            <div id="ueStats">
+                <p>Chargement des statistiques...</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="config.js"></script>
+<script>
+    // Navigation entre sections
+    function showSection(sectionId) {
+        // Masquer toutes les sections
+        document.querySelectorAll('.admin-section').forEach(section => {
+            section.classList.remove('active');
+        });
+        
+        // Afficher la section sélectionnée
+        document.getElementById('section-' + sectionId).classList.add('active');
+        
+        // Mettre à jour les boutons de navigation
+        document.querySelectorAll('.dashboard-nav button').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        event.target.classList.add('active');
+        
+        // Charger les données si nécessaire
+        if (sectionId === 'stats') {
+            loadUEStats();
+        }
+    }
+
+    // Édition UE
+    let currentUE = null;
+    
+    // Charger les données UE depuis localStorage
+    function loadUEData() {
+        const stored = localStorage.getItem('portfolioUEData');
+        if (stored) {
+            return JSON.parse(stored);
+        }
+        // Données par défaut
+        return {
+            'INF1492': {
+                code: 'INF 1492',
+                title: 'Logique combinatoire & séquentielle',
+                credits: '4',
+                desc: 'Conception de circuits logiques de base en travaux dirigés et TP.',
+                proof: '4 crédits · schémas portes logiques & bascules conçus',
+                skills: 'Conception de circuits combinatoires et séquentiels, tables de vérité, simulation logique',
+                bilan: 'Bonne maîtrise des fondamentaux de l\'électronique numérique, bases solides pour le matériel'
+            },
+            'INF1491': {
+                code: 'INF 1491',
+                title: 'Mise en œuvre & prise d\'empreintes',
+                credits: '3',
+                desc: 'Implémentation de chiffrements classiques et premiers pas en CTF.',
+                proof: '3 crédits · algorithmes implémentés',
+                skills: 'Chiffrement symétrique/asymétrique, hachage, empreintes numériques, cryptanalyse basique',
+                bilan: 'J\'ai commencé par coder les algorithmes classiques presque mécaniquement, avant de vraiment comprendre pourquoi chiffrement et hachage ne répondent pas au même besoin.'
+            },
+            'MTH1420': {
+                code: 'MTH 1420',
+                title: 'Optimisation & résolution numérique',
+                credits: '5',
+                desc: 'Recherche opérationnelle et implémentation Python de méthodes numériques.',
+                proof: '5 crédits · scripts Python',
+                skills: 'Résolution numérique d\'équations, méthodes d\'optimisation, implémentation Python',
+                bilan: 'Au début, Newton-Raphson et la bissection n\'étaient pour moi que des formules à appliquer ; c\'est en les codant en Python que j\'ai compris qu\'il s\'agit surtout d\'une façon de raisonner.'
+            },
+            'INF1493': {
+                code: 'INF 1493',
+                title: 'Investigation & manipulation humaine',
+                credits: '2',
+                desc: 'Analyse de cas concrets de manipulation et méthodologie d\'investigation.',
+                proof: '2 crédits · cas analysés',
+                skills: 'Méthodologie d\'investigation, analyse de traces, identification d\'attaques sociales',
+                bilan: 'Étudier des cas réels de phishing m\'a fait réaliser que la faille la plus exploitée n\'est presque jamais technique, mais humaine.'
+            },
+            'INF1423': {
+                code: 'INF 1423',
+                title: 'Complexité & structures de données',
+                credits: '5',
+                desc: 'Analyse de complexité d\'algorithmes de tri et structures classiques.',
+                proof: '5 crédits · algorithmes implémentés',
+                skills: 'Analyse de complexité, structures de données classiques, algorithmes de tri',
+                bilan: 'Comparer les complexités des algorithmes de tri m\'a obligé à sortir du simple « ça marche » pour me demander « est-ce que ça tient à l\'échelle ».'
+            },
+            'INF1490': {
+                code: 'INF 1490',
+                title: 'Windows Server & Linux',
+                credits: '5',
+                desc: 'Administration, gestion et automatisation sur environnements Windows et Linux.',
+                proof: '5 crédits · scripts & configurations',
+                skills: 'Administration Windows Server, administration Linux, scripting PowerShell',
+                bilan: 'Basculer entre Windows Server et Linux sur les mêmes TP m\'a appris à ne pas raisonner « un seul OS », mais à comparer.'
+            },
+            'RSI409': {
+                code: 'RSI 409',
+                title: 'Segmentation & durcissement LAN',
+                credits: '1.5',
+                desc: 'Configuration pare-feu, VLAN et règles de filtrage sur lab réseau.',
+                proof: '1.5 crédits · configurations validées',
+                skills: 'Segmentation VLAN, configuration pare-feu, durcissement réseau',
+                bilan: 'Configurer une segmentation VLAN sur FortiGate m\'a fait comprendre concrètement que segmenter un réseau n\'est pas une case à cocher mais une vraie décision de sécurité.'
+            },
+            'RSI411': {
+                code: 'RSI 411',
+                title: 'Durcissement des services',
+                credits: '1.5',
+                desc: 'Sécurisation de services réseau (DNS, messagerie, accès distants) en TP.',
+                proof: '1.5 crédits · services sécurisés',
+                skills: 'Durcissement DNS, sécurisation messagerie, protection accès distants',
+                bilan: 'Durcir DNS, messagerie et accès distants m\'a montré que sécuriser un réseau ne s\'arrête pas au pare-feu : chaque service ouvert est une porte à part entière.'
+            },
+            'SAESI401': {
+                code: 'SAESI 401',
+                title: 'Sécuriser un système d\'information',
+                credits: '0.5',
+                desc: 'Projet intégrateur : lab complet de sécurisation d\'un SI, documenté de bout en bout.',
+                proof: '0.5 crédits · lab documenté',
+                skills: 'Mobilisation transversale des UE, documentation technique, résolution problèmes complexes',
+                bilan: 'C\'est la première fois que j\'ai dû tenir un projet du début à la fin avec ses imprévus : la virtualisation imbriquée GNS3/VMware qui plante sans raison évidente.'
+            },
+            'STAGE': {
+                code: 'Stage',
+                title: 'Stage & rapport de stage',
+                credits: '2',
+                desc: 'Immersion en entreprise avec restitution écrite et orale des acquis S4.',
+                proof: '2 crédits · rapport de stage',
+                skills: 'Application professionnelle des compétences SI, communication technique',
+                bilan: 'Sortir du cadre des TP pour affronter de vraies contraintes d\'entreprise m\'a montré la différence entre « savoir faire » un exercice et « savoir faire » face à des délais.'
+            },
+            'PORTSI4': {
+                code: 'PORTSI 4',
+                title: 'Portfolio numérique S4',
+                credits: '0.5',
+                desc: 'Ce site : valorisation structurée des compétences, projets et parcours du semestre.',
+                proof: '0.5 crédits · site déployé',
+                skills: 'Documentation structurée, présentation professionnelle, valorisation des acquis',
+                bilan: 'Coder ce portfolio à la main plutôt qu\'avec un générateur m\'a obligé à comprendre chaque choix : pourquoi cette structure sémantique, pourquoi cette hiérarchie CSS.'
+            }
+        };
+    }
+    
+    function editUE(ueId) {
+        currentUE = ueId;
+        document.getElementById('ueEditor').style.display = 'block';
+        
+        const ueData = loadUEData();
+        
+        if (ueData[ueId]) {
+            document.getElementById('ueCode').value = ueData[ueId].code;
+            document.getElementById('ueTitle').value = ueData[ueId].title;
+            document.getElementById('ueCredits').value = ueData[ueId].credits;
+            document.getElementById('ueDesc').value = ueData[ueId].desc;
+            document.getElementById('ueProof').value = ueData[ueId].proof;
+            document.getElementById('ueSkills').value = ueData[ueId].skills;
+            document.getElementById('ueBilan').value = ueData[ueId].bilan;
+        }
+        
+        // Mettre en surbrillance l'UE sélectionnée
+        document.querySelectorAll('.ue-list-item').forEach(item => {
+            item.classList.remove('active');
+        });
+        event.target.classList.add('active');
+    }
+    
+    function cancelUEEdit() {
+        document.getElementById('ueEditor').style.display = 'none';
+        currentUE = null;
+        document.getElementById('ueForm').reset();
+        document.querySelectorAll('.ue-list-item').forEach(item => {
+            item.classList.remove('active');
+        });
+    }
+    
+    function saveUE() {
+        const ueData = loadUEData();
+        ueData[currentUE] = {
+            code: document.getElementById('ueCode').value,
+            title: document.getElementById('ueTitle').value,
+            credits: document.getElementById('ueCredits').value,
+            desc: document.getElementById('ueDesc').value,
+            proof: document.getElementById('ueProof').value,
+            skills: document.getElementById('ueSkills').value,
+            bilan: document.getElementById('ueBilan').value
+        };
+        localStorage.setItem('portfolioUEData', JSON.stringify(ueData));
+        alert('Modifications enregistrées !');
+        cancelUEEdit();
+    }
+
+    // Contact
+    function saveContact() {
+        const email = document.getElementById('adminEmail').value;
+        const phone = document.getElementById('adminPhone').value;
+        const linkedin = document.getElementById('adminLinkedin').value;
+        const github = document.getElementById('adminGithub').value;
+        
+        const contactData = { email, phone, linkedin, github };
+        localStorage.setItem('portfolioContactData', JSON.stringify(contactData));
+        
+        // Mettre à jour config.js dynamiquement (pour la session courante)
+        if (window.SITE) {
+            window.SITE.email = email;
+            window.SITE.phone = phone;
+            window.SITE.phoneDisplay = phone;
+            window.SITE.linkedin = linkedin;
+            window.SITE.github = github;
+        }
+        
+        alert('Informations de contact mises à jour !');
+    }
+
+    // Statistiques
+    function loadUEStats() {
+        const statsContainer = document.getElementById('ueStats');
+        statsContainer.innerHTML = `
+            <div class="ue-list-item">
+                <strong>INF 1492</strong> — Circuits numériques : 4 crédits
+            </div>
+            <div class="ue-list-item">
+                <strong>INF 1491</strong> — Cryptologie : 3 crédits
+            </div>
+            <div class="ue-list-item">
+                <strong>MTH 1420</strong> — Rech. opér. & analyse num. : 5 crédits
+            </div>
+            <div class="ue-list-item">
+                <strong>INF 1493</strong> — Forensique & ing. sociale : 2 crédits
+            </div>
+            <div class="ue-list-item">
+                <strong>INF 1423</strong> — Algorithmique & SD : 5 crédits
+            </div>
+            <div class="ue-list-item">
+                <strong>INF 1490</strong> — Admin. systèmes d'exploitation : 5 crédits
+            </div>
+            <div class="ue-list-item">
+                <strong>RSI 409</strong> — Sécurité réseaux LAN : 1.5 crédits
+            </div>
+            <div class="ue-list-item">
+                <strong>RSI 411</strong> — Sécurisation services réseau : 1.5 crédits
+            </div>
+            <div class="ue-list-item">
+                <strong>SAESI 401</strong> — SAE intégratrice : 0.5 crédits
+            </div>
+            <div class="ue-list-item">
+                <strong>Stage</strong> — Stage professionnel : 2 crédits
+            </div>
+            <div class="ue-list-item">
+                <strong>PORTSI 4</strong> — Portfolio numérique : 0.5 crédits
+            </div>
+        `;
+    }
+
+    // Charger les infos contact depuis localStorage ou config.js
+    window.addEventListener('DOMContentLoaded', () => {
+        // Charger depuis localStorage si disponible
+        const storedContact = localStorage.getItem('portfolioContactData');
+        if (storedContact) {
+            const contactData = JSON.parse(storedContact);
+            document.getElementById('adminEmail').value = contactData.email || '';
+            document.getElementById('adminPhone').value = contactData.phone || '';
+            document.getElementById('adminLinkedin').value = contactData.linkedin || '';
+            document.getElementById('adminGithub').value = contactData.github || '';
+        } else if (window.SITE) {
+            // Sinon charger depuis config.js
+            document.getElementById('adminEmail').value = window.SITE.email || '';
+            document.getElementById('adminPhone').value = window.SITE.phoneDisplay || '';
+            document.getElementById('adminLinkedin').value = window.SITE.linkedin || '';
+            document.getElementById('adminGithub').value = window.SITE.github || '';
+        }
+    });
+</script>
+
+</body>
+</html>

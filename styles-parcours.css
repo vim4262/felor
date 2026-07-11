@@ -1,0 +1,85 @@
+/* ============================================================
+   STYLES SPÉCIFIQUES — PAGE PARCOURS
+   Timeline, bilans, qualités
+   ============================================================ */
+
+.timeline-card {
+  padding: 24px;
+  background: var(--paper);
+  border: 1.5px solid var(--line2);
+  border-radius: 6px;
+}
+
+.dl-item {
+  display: flex;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+  transition: padding-left var(--t-med) var(--ease);
+}
+.dl-item:last-child { border-bottom: none; }
+.dl-item:hover { padding-left: 6px; }
+
+.dl-year {
+  font-family: var(--display);
+  font-size: 18px;
+  color: var(--accent);
+  min-width: 100px;
+  flex-shrink: 0;
+}
+
+.dl-title {
+  font-family: var(--head);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.dl-desc {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* ============ BILAN CARDS ============ */
+.bil {
+  padding: 20px;
+  background: var(--paper);
+  border: 1.5px solid var(--line2);
+  border-radius: 6px;
+  transition: border-color var(--t-med) var(--ease), transform var(--t-med) var(--ease);
+}
+
+.bil:hover { border-color: var(--line-accent); transform: translateY(-2px); }
+
+.bil-h {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--head);
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+.bil-h.success { color: var(--success); }
+.bil-h.horizon { color: var(--accent); }
+.bil-h.diff { color: #f59e0b; }
+.bil-h.improve { color: var(--ink2); }
+
+.bil p { font-size: 13px; line-height: 1.5; color: var(--muted); }
+
+/* ============ QUALITIES GRID ============ */
+.qualities-grid { gap: 16px; }
+
+/* .cta-band/.cta-inner/.cta-glow déplacés vers styles-components.css
+   (utilisée aussi sur index.html) */
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+  .dl-item { flex-direction: column; gap: 8px; }
+  .dl-item:hover { padding-left: 0; }
+  .dl-year { min-width: auto; }
+}
