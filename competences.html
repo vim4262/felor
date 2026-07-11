@@ -117,7 +117,7 @@
           </div>
           <div class="ue-field">
             <div class="ue-field-k">Bilan UE</div>
-Les tables de vérité aux circuits, j'ai pigé comment ça marche. C'est plus abstrait maintenant.
+Au début les tables de vérité c'était juste des tableaux, mais quand j'ai commencé à câbler les circuits ça a cliqué. Je me suis dit "ah mais ça c'est concret". Maintenant quand je vois un système je comprends mieux comment les petits blocs s'assemblent pour faire quelque chose de complexe.
           </div>
         </div>
         <div class="evi-foot">
@@ -145,7 +145,7 @@ Les tables de vérité aux circuits, j'ai pigé comment ça marche. C'est plus a
           </div>
           <div class="ue-field">
             <div class="ue-field-k">Bilan UE</div>
-Je codais les algos sans piger. Maintenant je vois la différence chiffrement/hachage. Les CTF m'apprennent à trouver les failles.
+Franchement au début je codais César et Vigenère comme un robot sans trop piger à quoi ça servait. Et puis un jour j'ai réalisé que le chiffrement c'est pour cacher, le hachage c'est pour vérifier. Les CTF sur NewbieContest m'ont changé ma façon de voir : au lieu de chercher la solution propre, je me demande "comment je pourrais casser ça".
           </div>
         </div>
         <div class="evi-foot">
@@ -172,7 +172,7 @@ Je codais les algos sans piger. Maintenant je vois la différence chiffrement/ha
           </div>
           <div class="ue-field">
             <div class="ue-field-k">Bilan UE</div>
-Newton-Raphson c'était des formules. En codant ça, j'ai compris que c'est une façon de raisonner. Ça aide pour les données.
+Newton-Raphson et la bissection, je les apprenais par cœur pour l'exam. Mais en les implémentant en Python j'ai compris le truc : c'est pas juste des maths, c'est une façon de raisonner. Tu t'approches petit à petit au lieu de trouver la solution directe. Ça m'aide quand je dois analyser des logs ou des données, je pense en itérations maintenant.
           </div>
         </div>
         <div class="evi-foot">
@@ -200,7 +200,7 @@ Newton-Raphson c'était des formules. En codant ça, j'ai compris que c'est une 
           </div>
           <div class="ue-field">
             <div class="ue-field-k">Bilan UE</div>
-Phishing = faille humaine, pas technique. Maintenant je pense à la manipulation des gens aussi.
+Les études de cas de phishing m'ont fait un choc. Je pensais que la sécurité c'était du technique, mais en fait le maillon faible c'est toujours l'humain. Depuis ce cours, quand je sécurise un système je me demande pas juste "comment protéger le serveur" mais aussi "comment quelqu'un pourrait manipuler l'admin pour avoir accès".
           </div>
         </div>
         <div class="evi-foot">
@@ -228,7 +228,7 @@ Phishing = faille humaine, pas technique. Maintenant je pense à la manipulation
           </div>
           <div class="ue-field">
             <div class="ue-field-k">Bilan UE</div>
-Les algos de tri m'ont fait sortir du "ça marche" pour demander si ça scale. Je me pose la question auto.
+Avant quand mon code triait un tableau je me disais "cool ça marche". Mais comparer les complexités m'a obligé à réfléchir : est-ce que ça va tenir si j'ai 10 fois plus de données ? Maintenant c'est un réflexe, dès que j'écris un algo ou que je conçois un réseau je me demande si ça va scale.
           </div>
         </div>
         <div class="evi-foot">
@@ -256,7 +256,7 @@ Les algos de tri m'ont fait sortir du "ça marche" pour demander si ça scale. J
           </div>
           <div class="ue-field">
             <div class="ue-field-k">Bilan UE</div>
-Windows/Linux = comparer les droits, logs, différences. PowerShell évite de refaire les mêmes trucs.
+Faire les mêmes TP sur Windows Server et Linux, ça m'a forcé à comparer. C'est pas pareil : les droits sont gérés différemment, les logs sont pas au même endroit, les commandes changent. Et puis PowerShell m'a montré que scripter ça vaut le coup : au lieu de refaire 50 fois la même manip manuellement, tu écris un script une fois et c'est bon.
           </div>
         </div>
         <div class="evi-foot">
@@ -284,7 +284,7 @@ Windows/Linux = comparer les droits, logs, différences. PowerShell évite de re
           </div>
           <div class="ue-field">
             <div class="ue-field-k">Bilan UE</div>
-VLAN sur FortiGate = segmenter pour limiter les dégâts si une machine est compromise. Théorie/practice se rejoignent.
+Quand j'ai configuré les VLAN sur le FortiGate j'ai vraiment compris pourquoi on segmente un réseau. C'est pas juste une case à cocher, c'est pour limiter les dégâts si une machine se fait compromettre. C'est dans cette UE que j'ai le plus senti que la théorie et la pratique ça se rejoign vraiment, ça a du sens concret.
           </div>
         </div>
         <div class="evi-foot">
@@ -312,7 +312,7 @@ VLAN sur FortiGate = segmenter pour limiter les dégâts si une machine est comp
           </div>
           <div class="ue-field">
             <div class="ue-field-k">Bilan UE</div>
-DNS/messagerie/accès distants = sécurité pas juste pare-feu. Chaque service ouvert = porte. Complète les VLAN.
+Durcir DNS, la messagerie et les accès distants m'a montré que la sécurité ça s'arrête pas au pare-feu. Chaque service que tu ouvres c'est une porte d'entrée potentielle, faut la sécuriser spécifiquement. Ça complète bien ce qu'on a fait avec les VLAN : les VLAN limitent les chemins, mais faut aussi fermer les portes inutiles.
           </div>
         </div>
         <div class="evi-foot">
@@ -340,7 +340,7 @@ DNS/messagerie/accès distants = sécurité pas juste pare-feu. Chaque service o
           </div>
           <div class="ue-field">
             <div class="ue-field-k">Bilan UE</div>
-Premier projet A à Z avec imprévus. GNS3/VMware plante, doc à reprendre... J'ai appris à documenter en cours, pas à la fin.
+C'était la première fois que je gérais un projet du début à la fin. Y'a eu des imprévus : la virtualisation imbriquée GNS3/VMware qui plantait sans raison claire, la documentation que je devais reprendre parce qu'elle était pas compréhensible pour quelqu'un d'extérieur. J'ai appris à documenter au fur et à mesure et pas tout à la fin quand j'ai oublié les détails.
           </div>
         </div>
         <div class="evi-foot">
@@ -368,7 +368,7 @@ Premier projet A à Z avec imprévus. GNS3/VMware plante, doc à reprendre... J'
           </div>
           <div class="ue-field">
             <div class="ue-field-k">Bilan UE</div>
-Stage = différence TP vs contraintes entreprise. Rapport = reformuler pour que ça ait du sens pour l'extérieur.
+Le stage m'a fait sortir du cadre des TP. En entreprise t'as des vraies contraintes : des délais, des gens qui sont pas techniques, des problèmes imprévus. C'est pas la même chose que "ça marche dans le lab". Rédiger le rapport m'a aussi obligé à reformuler ce que j'ai appris pour que ça ait du sens pour quelqu'un qui connait pas le sujet.
           </div>
         </div>
         <div class="evi-foot">
@@ -396,7 +396,7 @@ Stage = différence TP vs contraintes entreprise. Rapport = reformuler pour que 
           </div>
           <div class="ue-field">
             <div class="ue-field-k">Bilan UE</div>
-Portfolio à la main = comprendre chaque choix. Structure, CSS. Pas parfait mais j'explique chaque ligne.
+Coder ce portfolio à la main au lieu d'utiliser un générateur, ça m'a pris du temps mais ça m'a forcé à comprendre chaque choix. Pourquoi cette structure HTML, pourquoi cette hiérarchie CSS. Le résultat est pas parfait visuellement, mais au moins je sais expliquer chaque ligne de code et c'est ça qui compte pour moi.
           </div>
         </div>
         <div class="evi-foot">
