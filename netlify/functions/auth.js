@@ -122,6 +122,8 @@ function verifyToken(event) {
 
 // Login endpoint
 exports.handler = async (event) => {
+  console.log('Auth function called:', event.path, event.httpMethod);
+  
   // Initialize database
   await initDB();
   
@@ -129,8 +131,24 @@ exports.handler = async (event) => {
   const path = event.path;
   const action = path.split('/').pop();
   
+  console.log('Action:', action, 'Path:', path);
+  
   if (event.httpMethod === 'POST' && action === 'login') {
-    const { username, password } = JSON.parse(event.body);
+    console.log('Login attempt');
+    
+    let body;
+    try {
+      body = JSON.parse(event.body);
+      console.log('Login body:', { username: body.username, password: '***' });
+    } catch (e) {
+      console.error('JSON parse error:', e);
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: 'Invalid JSON' })
+      };
+    }
+    
+    const { username, password } = body;
     
     try {
       const result = await client.execute({
@@ -138,7 +156,10 @@ exports.handler = async (event) => {
         args: [username]
       });
       
+      console.log('User query result:', result.rows.length, 'rows');
+      
       if (result.rows.length === 0) {
+        console.log('User not found:', username);
         return {
           statusCode: 401,
           body: JSON.stringify({ error: 'Invalid credentials' })
@@ -147,6 +168,8 @@ exports.handler = async (event) => {
       
       const bcrypt = require('bcrypt');
       const validPassword = await bcrypt.compare(password, result.rows[0].password_hash);
+      
+      console.log('Password valid:', validPassword);
       
       if (!validPassword) {
         return {
@@ -160,6 +183,8 @@ exports.handler = async (event) => {
         JWT_SECRET,
         { expiresIn: '24h' }
       );
+      
+      console.log('Login successful for:', username);
       
       return {
         statusCode: 200,
@@ -176,21 +201,25 @@ exports.handler = async (event) => {
   
   // Verify token endpoint
   if (event.httpMethod === 'GET' && action === 'verify') {
+    console.log('Verify token attempt');
     const decoded = verifyToken(event);
     
     if (!decoded) {
+      console.log('Token invalid');
       return {
         statusCode: 401,
         body: JSON.stringify({ error: 'Invalid token' })
       };
     }
     
+    console.log('Token valid');
     return {
       statusCode: 200,
       body: JSON.stringify({ valid: true, user: decoded })
     };
   }
   
+  console.log('No matching endpoint');
   return {
     statusCode: 404,
     body: JSON.stringify({ error: 'Not found', path: path, action: action })
