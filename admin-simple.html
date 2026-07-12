@@ -1,28 +1,50 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Portfolio EKOE</title>
-    <link rel="stylesheet" href="styles-main.css">
-    <link rel="stylesheet" href="styles-base.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — EKOE Félicio Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@500;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles-variables.css">
+<link rel="stylesheet" href="styles-base.css">
+<link rel="stylesheet" href="styles-components.css">
+<link rel="stylesheet" href="styles-navigation.css">
+<link rel="stylesheet" href="styles-main.css">
+<meta name="description" content="Panel d'administration — Portfolio EKOE Félicio Sécurité Informatique S4">
+<meta name="theme-color" content="#09090B">
 </head>
 <body>
-    <nav class="main-nav">
-        <div class="nav-content">
-            <a href="index.html" class="nav-logo">EKOE<span class="highlight">.portfolio</span></a>
-            <div class="nav-links">
-                <a href="index.html">Accueil</a>
-                <a href="parcours.html">Parcours</a>
-                <a href="competences.html">Compétences</a>
-                <a href="projets.html">Projets</a>
-                <a href="contact.html">Contact</a>
-                <a href="admin-simple.html" class="active">Admin</a>
-            </div>
-        </div>
-    </nav>
 
-    <div class="dashboard-container">
+<canvas id="particles" aria-hidden="true"></canvas>
+
+<a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+<div class="case-bar">
+  <div class="wrap">
+    <span>Portfolio N° EKOE-S4-2026 <span class="blink">_</span></span>
+    <span>Admin</span>
+  </div>
+</div>
+
+<nav class="main-nav">
+  <div class="nav-content">
+    <a href="index.html" class="nav-logo">EKOE<span class="highlight">.portfolio</span></a>
+    <div class="nav-links">
+      <a href="index.html">Accueil</a>
+      <a href="parcours.html">Parcours</a>
+      <a href="competences.html">Compétences</a>
+      <a href="projets.html">Projets</a>
+      <a href="contact.html">Contact</a>
+      <a href="admin-simple.html" class="active">Admin</a>
+    </div>
+  </div>
+</nav>
+
+<div class="nav-bottom-rule"></div>
+
+<main id="main-content" class="dashboard-container">
         <div class="dashboard-header">
             <h1>Dashboard d'administration</h1>
             <p class="cover-sub">Gérez et modifiez le contenu de votre portfolio S4</p>
@@ -155,9 +177,17 @@
             </div>
         </div>
     </div>
+</main>
 
-    <script src="config.js"></script>
-    <script>
+<footer>
+  <div class="wrap">
+    <p>© 2026 EKOE Félicio — Portfolio Sécurité Informatique S4</p>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script src="particles.js"></script>
+<script>
         // Simple localStorage-based admin panel
         const ADMIN_CREDENTIALS = { username: 'felicio', password: 'felicio' };
         let isAuthenticated = localStorage.getItem('adminAuthenticated') === 'true';
@@ -291,6 +321,11 @@
             }
             document.getElementById('loginForm').addEventListener('submit', handleLogin);
         });
+        
+        // Initialize particles if available
+        if (typeof initParticles === 'function') {
+            initParticles();
+        }
 
         function handleLogin(e) {
             e.preventDefault();
