@@ -188,14 +188,34 @@
     <div class="dashboard-header">
         <h1>Dashboard d'administration</h1>
         <p class="cover-sub">Gérez et modifiez le contenu de votre portfolio S4</p>
-        <div id="dashboardContent">
+        <div id="loginSection" style="margin-top:20px;">
+            <div class="admin-card">
+                <h3>Connexion sécurisée</h3>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label>Identifiant</label>
+                        <input type="text" id="loginUsername" placeholder="felicio" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mot de passe</label>
+                        <input type="password" id="loginPassword" placeholder="••••••••" required>
+                    </div>
+                    <div class="admin-actions">
+                        <button type="submit" class="btn-save">Se connecter</button>
+                    </div>
+                </form>
+                <p id="loginError" style="color:#e11d48; margin-top:12px; display:none;">Identifiants incorrects</p>
+            </div>
+        </div>
+        <div id="dashboardContent" style="display:none;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-                <p style="color:var(--muted); font-size:14px;">Mode administration (accès direct)</p>
+                <p style="color:var(--muted); font-size:14px;">Connecté en tant que <strong id="currentUser"></strong></p>
+                <button onclick="logout()" class="btn-cancel">Déconnexion</button>
             </div>
         </div>
     </div>
 
-    <div class="dashboard-nav" id="dashboardNav">
+    <div class="dashboard-nav" id="dashboardNav" style="display:none;">
         <button class="active" onclick="showSection('overview')">Vue d'ensemble</button>
         <button onclick="showSection('ue')">Modifier les UE</button>
         <button onclick="showSection('projects')">Projets</button>
@@ -206,7 +226,7 @@
     </div>
 
     <!-- Section Vue d'ensemble -->
-    <div id="section-overview" class="admin-section active" style="display:block;">
+    <div id="section-overview" class="admin-section active">
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-number">11</div>
@@ -531,20 +551,105 @@
 
 <script src="config.js"></script>
 <script>
-    // Simple admin panel without authentication for now
+    // API Base URL
+    const API_BASE = '/.netlify/functions';
     
-    window.addEventListener('DOMContentLoaded', () => {
-        // Load contact data on page load
-        loadContactData();
+    // Token storage
+    let authToken = localStorage.getItem('adminToken');
+    
+    // Check authentication on load
+    window.addEventListener('DOMContentLoaded', async () => {
+        if (authToken) {
+            const isValid = await verifyToken();
+            if (isValid) {
+                showDashboard();
+            } else {
+                logout();
+            }
+        }
+        
+        // Setup login form
+        document.getElementById('loginForm').addEventListener('submit', handleLogin);
     });
     
-    // API helper (without auth for now)
+    // Login handler
+    async function handleLogin(e) {
+        e.preventDefault();
+        const username = document.getElementById('loginUsername').value;
+        const password = document.getElementById('loginPassword').value;
+        
+        try {
+            const response = await fetch(`${API_BASE}/auth/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok) {
+                authToken = data.token;
+                localStorage.setItem('adminToken', authToken);
+                document.getElementById('currentUser').textContent = data.username;
+                showDashboard();
+            } else {
+                document.getElementById('loginError').textContent = data.error || 'Erreur de connexion';
+                document.getElementById('loginError').style.display = 'block';
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            document.getElementById('loginError').textContent = 'Erreur réseau: ' + error.message;
+            document.getElementById('loginError').style.display = 'block';
+        }
+    }
+    
+    // Verify token
+    async function verifyToken() {
+        try {
+            const response = await fetch(`${API_BASE}/auth/verify`, {
+                headers: { 'Authorization': `Bearer ${authToken}` }
+            });
+            return response.ok;
+        } catch (error) {
+            return false;
+        }
+    }
+    
+    // Show dashboard
+    function showDashboard() {
+        document.getElementById('loginSection').style.display = 'none';
+        document.getElementById('dashboardContent').style.display = 'block';
+        document.getElementById('dashboardNav').style.display = 'flex';
+        
+        // Show all admin sections
+        document.querySelectorAll('.admin-section').forEach(section => {
+            section.style.display = 'block';
+        });
+    }
+    
+    // Logout
+    function logout() {
+        authToken = null;
+        localStorage.removeItem('adminToken');
+        document.getElementById('loginSection').style.display = 'block';
+        document.getElementById('dashboardContent').style.display = 'none';
+        document.getElementById('dashboardNav').style.display = 'none';
+        document.getElementById('loginForm').reset();
+        document.getElementById('loginError').style.display = 'none';
+        
+        // Hide all admin sections
+        document.querySelectorAll('.admin-section').forEach(section => {
+            section.style.display = 'none';
+        });
+    }
+    
+    // API helper with authentication
     async function apiCall(endpoint, method = 'GET', body = null) {
-        const API_BASE = '/.netlify/functions';
         const options = {
             method,
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${authToken}`
             }
         };
         
@@ -554,6 +659,12 @@
         
         try {
             const response = await fetch(`${API_BASE}/api${endpoint}`, options);
+            
+            if (response.status === 401) {
+                logout();
+                return null;
+            }
+            
             return await response.json();
         } catch (error) {
             console.error('API call failed:', error);
