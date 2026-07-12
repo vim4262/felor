@@ -47,6 +47,47 @@ async function initDB() {
       )
     `);
     
+    await client.execute(`
+      CREATE TABLE IF NOT EXISTS projects (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL,
+        description TEXT,
+        image_url TEXT,
+        tags TEXT,
+        link_url TEXT,
+        category TEXT,
+        order_index INTEGER DEFAULT 0,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+    
+    await client.execute(`
+      CREATE TABLE IF NOT EXISTS skills (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        category TEXT,
+        level INTEGER DEFAULT 50,
+        order_index INTEGER DEFAULT 0,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+    
+    await client.execute(`
+      CREATE TABLE IF NOT EXISTS parcours (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        year TEXT NOT NULL,
+        title TEXT NOT NULL,
+        description TEXT,
+        institution TEXT,
+        type TEXT,
+        order_index INTEGER DEFAULT 0,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+    
     // Create default admin user if not exists (username: admin, password: admin123)
     const bcrypt = require('bcrypt');
     const passwordHash = await bcrypt.hash('admin123', 10);
@@ -84,7 +125,11 @@ exports.handler = async (event) => {
   // Initialize database
   await initDB();
   
-  if (event.httpMethod === 'POST' && event.path === '/.netlify/functions/auth/login') {
+  // Extract action from path or query string
+  const path = event.path;
+  const action = path.split('/').pop();
+  
+  if (event.httpMethod === 'POST' && action === 'login') {
     const { username, password } = JSON.parse(event.body);
     
     try {
@@ -121,15 +166,16 @@ exports.handler = async (event) => {
         body: JSON.stringify({ token, username: result.rows[0].username })
       };
     } catch (error) {
+      console.error('Login error:', error);
       return {
         statusCode: 500,
-        body: JSON.stringify({ error: 'Login failed' })
+        body: JSON.stringify({ error: 'Login failed', details: error.message })
       };
     }
   }
   
   // Verify token endpoint
-  if (event.httpMethod === 'GET' && event.path === '/.netlify/functions/auth/verify') {
+  if (event.httpMethod === 'GET' && action === 'verify') {
     const decoded = verifyToken(event);
     
     if (!decoded) {
@@ -147,6 +193,6 @@ exports.handler = async (event) => {
   
   return {
     statusCode: 404,
-    body: JSON.stringify({ error: 'Not found' })
+    body: JSON.stringify({ error: 'Not found', path: path, action: action })
   };
 };

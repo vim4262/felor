@@ -218,6 +218,9 @@
     <div class="dashboard-nav" id="dashboardNav" style="display:none;">
         <button class="active" onclick="showSection('overview')">Vue d'ensemble</button>
         <button onclick="showSection('ue')">Modifier les UE</button>
+        <button onclick="showSection('projects')">Projets</button>
+        <button onclick="showSection('skills')">Compétences</button>
+        <button onclick="showSection('parcours')">Parcours</button>
         <button onclick="showSection('contact')">Infos contact</button>
         <button onclick="showSection('stats')">Statistiques</button>
     </div>
@@ -328,6 +331,161 @@
                 <div class="admin-actions">
                     <button type="button" class="btn-save" onclick="saveUE()">Enregistrer</button>
                     <button type="button" class="btn-cancel" onclick="cancelUEEdit()">Annuler</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Section Projets -->
+    <div id="section-projects" class="admin-section">
+        <div class="admin-card">
+            <h3>Gestion des projets</h3>
+            <div class="admin-actions" style="margin-bottom:20px;">
+                <button class="btn-save" onclick="showProjectForm()">+ Ajouter un projet</button>
+            </div>
+            <div id="projectsList">
+                <p>Chargement des projets...</p>
+            </div>
+        </div>
+
+        <div id="projectForm" class="admin-card" style="display:none;">
+            <h3 id="projectFormTitle">Ajouter un projet</h3>
+            <form id="projectFormElement">
+                <input type="hidden" id="projectId">
+                <div class="form-group">
+                    <label>Titre</label>
+                    <input type="text" id="projectTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="projectDescription" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>URL de l'image</label>
+                    <input type="text" id="projectImageUrl">
+                </div>
+                <div class="form-group">
+                    <label>Tags (séparés par des virgules)</label>
+                    <input type="text" id="projectTags">
+                </div>
+                <div class="form-group">
+                    <label>Lien du projet</label>
+                    <input type="text" id="projectLinkUrl">
+                </div>
+                <div class="form-group">
+                    <label>Catégorie</label>
+                    <select id="projectCategory">
+                        <option value="sae">SAE</option>
+                        <option value="perso">Personnel</option>
+                        <option value="tp">TP</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Ordre d'affichage</label>
+                    <input type="number" id="projectOrderIndex" value="0">
+                </div>
+                <div class="admin-actions">
+                    <button type="button" class="btn-save" onclick="saveProject()">Enregistrer</button>
+                    <button type="button" class="btn-cancel" onclick="hideProjectForm()">Annuler</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Section Compétences -->
+    <div id="section-skills" class="admin-section">
+        <div class="admin-card">
+            <h3>Gestion des compétences</h3>
+            <div class="admin-actions" style="margin-bottom:20px;">
+                <button class="btn-save" onclick="showSkillForm()">+ Ajouter une compétence</button>
+            </div>
+            <div id="skillsList">
+                <p>Chargement des compétences...</p>
+            </div>
+        </div>
+
+        <div id="skillForm" class="admin-card" style="display:none;">
+            <h3 id="skillFormTitle">Ajouter une compétence</h3>
+            <form id="skillFormElement">
+                <input type="hidden" id="skillId">
+                <div class="form-group">
+                    <label>Nom</label>
+                    <input type="text" id="skillName" required>
+                </div>
+                <div class="form-group">
+                    <label>Catégorie</label>
+                    <select id="skillCategory">
+                        <option value="reseaux">Réseaux</option>
+                        <option value="securite">Sécurité</option>
+                        <option value="dev">Développement</option>
+                        <option value="systeme">Système</option>
+                        <option value="autre">Autre</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Niveau (0-100)</label>
+                    <input type="number" id="skillLevel" min="0" max="100" value="50">
+                </div>
+                <div class="form-group">
+                    <label>Ordre d'affichage</label>
+                    <input type="number" id="skillOrderIndex" value="0">
+                </div>
+                <div class="admin-actions">
+                    <button type="button" class="btn-save" onclick="saveSkill()">Enregistrer</button>
+                    <button type="button" class="btn-cancel" onclick="hideSkillForm()">Annuler</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Section Parcours -->
+    <div id="section-parcours" class="admin-section">
+        <div class="admin-card">
+            <h3>Gestion du parcours</h3>
+            <div class="admin-actions" style="margin-bottom:20px;">
+                <button class="btn-save" onclick="showParcoursForm()">+ Ajouter une étape</button>
+            </div>
+            <div id="parcoursList">
+                <p>Chargement du parcours...</p>
+            </div>
+        </div>
+
+        <div id="parcoursForm" class="admin-card" style="display:none;">
+            <h3 id="parcoursFormTitle">Ajouter une étape</h3>
+            <form id="parcoursFormElement">
+                <input type="hidden" id="parcoursId">
+                <div class="form-group">
+                    <label>Année</label>
+                    <input type="text" id="parcoursYear" placeholder="Ex: 2025-26" required>
+                </div>
+                <div class="form-group">
+                    <label>Titre</label>
+                    <input type="text" id="parcoursTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="parcoursDescription"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Institution</label>
+                    <input type="text" id="parcoursInstitution">
+                </div>
+                <div class="form-group">
+                    <label>Type</label>
+                    <select id="parcoursType">
+                        <option value="formation">Formation</option>
+                        <option value="stage">Stage</option>
+                        <option value="certification">Certification</option>
+                        <option value="autre">Autre</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Ordre d'affichage</label>
+                    <input type="number" id="parcoursOrderIndex" value="0">
+                </div>
+                <div class="admin-actions">
+                    <button type="button" class="btn-save" onclick="saveParcours()">Enregistrer</button>
+                    <button type="button" class="btn-cancel" onclick="hideParcoursForm()">Annuler</button>
                 </div>
             </form>
         </div>
@@ -525,6 +683,15 @@
         // Charger les données si nécessaire
         if (sectionId === 'stats') {
             loadUEStats();
+        }
+        if (sectionId === 'projects') {
+            loadProjects();
+        }
+        if (sectionId === 'skills') {
+            loadSkills();
+        }
+        if (sectionId === 'parcours') {
+            loadParcours();
         }
     }
 
@@ -733,6 +900,298 @@
         } catch (error) {
             console.error('Error saving contact:', error);
             alert('Erreur lors de l\'enregistrement');
+        }
+    }
+
+    // Projects management
+    async function loadProjects() {
+        try {
+            const projects = await apiCall('/projects');
+            const container = document.getElementById('projectsList');
+            
+            if (projects.length === 0) {
+                container.innerHTML = '<p>Aucun projet pour le moment.</p>';
+                return;
+            }
+            
+            container.innerHTML = projects.map(project => `
+                <div class="ue-list-item" style="display:flex; justify-content:space-between; align-items:center;">
+                    <div>
+                        <strong>${project.title}</strong>
+                        <br><small style="color:var(--muted);">${project.category} · ${project.tags.join(', ')}</small>
+                    </div>
+                    <div style="display:flex; gap:8px;">
+                        <button class="btn-save" style="padding:6px 12px; font-size:11px;" onclick="editProject(${project.id})">Modifier</button>
+                        <button class="btn-cancel" style="padding:6px 12px; font-size:11px;" onclick="deleteProject(${project.id})">Supprimer</button>
+                    </div>
+                </div>
+            `).join('');
+        } catch (error) {
+            console.error('Error loading projects:', error);
+            document.getElementById('projectsList').innerHTML = '<p>Erreur lors du chargement des projets.</p>';
+        }
+    }
+    
+    function showProjectForm() {
+        document.getElementById('projectForm').style.display = 'block';
+        document.getElementById('projectFormTitle').textContent = 'Ajouter un projet';
+        document.getElementById('projectFormElement').reset();
+        document.getElementById('projectId').value = '';
+    }
+    
+    function hideProjectForm() {
+        document.getElementById('projectForm').style.display = 'none';
+        document.getElementById('projectFormElement').reset();
+    }
+    
+    async function editProject(id) {
+        try {
+            const project = await apiCall(`/projects/${id}`);
+            document.getElementById('projectForm').style.display = 'block';
+            document.getElementById('projectFormTitle').textContent = 'Modifier le projet';
+            document.getElementById('projectId').value = project.id;
+            document.getElementById('projectTitle').value = project.title;
+            document.getElementById('projectDescription').value = project.description;
+            document.getElementById('projectImageUrl').value = project.image_url || '';
+            document.getElementById('projectTags').value = project.tags.join(', ');
+            document.getElementById('projectLinkUrl').value = project.link_url || '';
+            document.getElementById('projectCategory').value = project.category;
+            document.getElementById('projectOrderIndex').value = project.order_index;
+        } catch (error) {
+            console.error('Error loading project:', error);
+            alert('Erreur lors du chargement du projet');
+        }
+    }
+    
+    async function saveProject() {
+        const id = document.getElementById('projectId').value;
+        const data = {
+            title: document.getElementById('projectTitle').value,
+            description: document.getElementById('projectDescription').value,
+            image_url: document.getElementById('projectImageUrl').value,
+            tags: document.getElementById('projectTags').value.split(',').map(t => t.trim()).filter(t => t),
+            link_url: document.getElementById('projectLinkUrl').value,
+            category: document.getElementById('projectCategory').value,
+            order_index: parseInt(document.getElementById('projectOrderIndex').value)
+        };
+        
+        try {
+            if (id) {
+                await apiCall(`/projects/${id}`, 'PUT', data);
+            } else {
+                await apiCall('/projects', 'POST', data);
+            }
+            alert('Projet enregistré !');
+            hideProjectForm();
+            loadProjects();
+        } catch (error) {
+            console.error('Error saving project:', error);
+            alert('Erreur lors de l\'enregistrement');
+        }
+    }
+    
+    async function deleteProject(id) {
+        if (!confirm('Êtes-vous sûr de vouloir supprimer ce projet ?')) return;
+        
+        try {
+            await apiCall(`/projects/${id}`, 'DELETE');
+            alert('Projet supprimé !');
+            loadProjects();
+        } catch (error) {
+            console.error('Error deleting project:', error);
+            alert('Erreur lors de la suppression');
+        }
+    }
+    
+    // Skills management
+    async function loadSkills() {
+        try {
+            const skills = await apiCall('/skills');
+            const container = document.getElementById('skillsList');
+            
+            if (skills.length === 0) {
+                container.innerHTML = '<p>Aucune compétence pour le moment.</p>';
+                return;
+            }
+            
+            container.innerHTML = skills.map(skill => `
+                <div class="ue-list-item" style="display:flex; justify-content:space-between; align-items:center;">
+                    <div>
+                        <strong>${skill.name}</strong>
+                        <br><small style="color:var(--muted);">${skill.category} · Niveau: ${skill.level}%</small>
+                    </div>
+                    <div style="display:flex; gap:8px;">
+                        <button class="btn-save" style="padding:6px 12px; font-size:11px;" onclick="editSkill(${skill.id})">Modifier</button>
+                        <button class="btn-cancel" style="padding:6px 12px; font-size:11px;" onclick="deleteSkill(${skill.id})">Supprimer</button>
+                    </div>
+                </div>
+            `).join('');
+        } catch (error) {
+            console.error('Error loading skills:', error);
+            document.getElementById('skillsList').innerHTML = '<p>Erreur lors du chargement des compétences.</p>';
+        }
+    }
+    
+    function showSkillForm() {
+        document.getElementById('skillForm').style.display = 'block';
+        document.getElementById('skillFormTitle').textContent = 'Ajouter une compétence';
+        document.getElementById('skillFormElement').reset();
+        document.getElementById('skillId').value = '';
+    }
+    
+    function hideSkillForm() {
+        document.getElementById('skillForm').style.display = 'none';
+        document.getElementById('skillFormElement').reset();
+    }
+    
+    async function editSkill(id) {
+        try {
+            const skill = await apiCall(`/skills/${id}`);
+            document.getElementById('skillForm').style.display = 'block';
+            document.getElementById('skillFormTitle').textContent = 'Modifier la compétence';
+            document.getElementById('skillId').value = skill.id;
+            document.getElementById('skillName').value = skill.name;
+            document.getElementById('skillCategory').value = skill.category;
+            document.getElementById('skillLevel').value = skill.level;
+            document.getElementById('skillOrderIndex').value = skill.order_index;
+        } catch (error) {
+            console.error('Error loading skill:', error);
+            alert('Erreur lors du chargement de la compétence');
+        }
+    }
+    
+    async function saveSkill() {
+        const id = document.getElementById('skillId').value;
+        const data = {
+            name: document.getElementById('skillName').value,
+            category: document.getElementById('skillCategory').value,
+            level: parseInt(document.getElementById('skillLevel').value),
+            order_index: parseInt(document.getElementById('skillOrderIndex').value)
+        };
+        
+        try {
+            if (id) {
+                await apiCall(`/skills/${id}`, 'PUT', data);
+            } else {
+                await apiCall('/skills', 'POST', data);
+            }
+            alert('Compétence enregistrée !');
+            hideSkillForm();
+            loadSkills();
+        } catch (error) {
+            console.error('Error saving skill:', error);
+            alert('Erreur lors de l\'enregistrement');
+        }
+    }
+    
+    async function deleteSkill(id) {
+        if (!confirm('Êtes-vous sûr de vouloir supprimer cette compétence ?')) return;
+        
+        try {
+            await apiCall(`/skills/${id}`, 'DELETE');
+            alert('Compétence supprimée !');
+            loadSkills();
+        } catch (error) {
+            console.error('Error deleting skill:', error);
+            alert('Erreur lors de la suppression');
+        }
+    }
+    
+    // Parcours management
+    async function loadParcours() {
+        try {
+            const parcours = await apiCall('/parcours');
+            const container = document.getElementById('parcoursList');
+            
+            if (parcours.length === 0) {
+                container.innerHTML = '<p>Aucune étape de parcours pour le moment.</p>';
+                return;
+            }
+            
+            container.innerHTML = parcours.map(item => `
+                <div class="ue-list-item" style="display:flex; justify-content:space-between; align-items:center;">
+                    <div>
+                        <strong>${item.year}</strong> — ${item.title}
+                        <br><small style="color:var(--muted);">${item.institution} · ${item.type}</small>
+                    </div>
+                    <div style="display:flex; gap:8px;">
+                        <button class="btn-save" style="padding:6px 12px; font-size:11px;" onclick="editParcours(${item.id})">Modifier</button>
+                        <button class="btn-cancel" style="padding:6px 12px; font-size:11px;" onclick="deleteParcours(${item.id})">Supprimer</button>
+                    </div>
+                </div>
+            `).join('');
+        } catch (error) {
+            console.error('Error loading parcours:', error);
+            document.getElementById('parcoursList').innerHTML = '<p>Erreur lors du chargement du parcours.</p>';
+        }
+    }
+    
+    function showParcoursForm() {
+        document.getElementById('parcoursForm').style.display = 'block';
+        document.getElementById('parcoursFormTitle').textContent = 'Ajouter une étape';
+        document.getElementById('parcoursFormElement').reset();
+        document.getElementById('parcoursId').value = '';
+    }
+    
+    function hideParcoursForm() {
+        document.getElementById('parcoursForm').style.display = 'none';
+        document.getElementById('parcoursFormElement').reset();
+    }
+    
+    async function editParcours(id) {
+        try {
+            const item = await apiCall(`/parcours/${id}`);
+            document.getElementById('parcoursForm').style.display = 'block';
+            document.getElementById('parcoursFormTitle').textContent = 'Modifier l\'étape';
+            document.getElementById('parcoursId').value = item.id;
+            document.getElementById('parcoursYear').value = item.year;
+            document.getElementById('parcoursTitle').value = item.title;
+            document.getElementById('parcoursDescription').value = item.description || '';
+            document.getElementById('parcoursInstitution').value = item.institution || '';
+            document.getElementById('parcoursType').value = item.type;
+            document.getElementById('parcoursOrderIndex').value = item.order_index;
+        } catch (error) {
+            console.error('Error loading parcours item:', error);
+            alert('Erreur lors du chargement de l\'étape');
+        }
+    }
+    
+    async function saveParcours() {
+        const id = document.getElementById('parcoursId').value;
+        const data = {
+            year: document.getElementById('parcoursYear').value,
+            title: document.getElementById('parcoursTitle').value,
+            description: document.getElementById('parcoursDescription').value,
+            institution: document.getElementById('parcoursInstitution').value,
+            type: document.getElementById('parcoursType').value,
+            order_index: parseInt(document.getElementById('parcoursOrderIndex').value)
+        };
+        
+        try {
+            if (id) {
+                await apiCall(`/parcours/${id}`, 'PUT', data);
+            } else {
+                await apiCall('/parcours', 'POST', data);
+            }
+            alert('Étape enregistrée !');
+            hideParcoursForm();
+            loadParcours();
+        } catch (error) {
+            console.error('Error saving parcours item:', error);
+            alert('Erreur lors de l\'enregistrement');
+        }
+    }
+    
+    async function deleteParcours(id) {
+        if (!confirm('Êtes-vous sûr de vouloir supprimer cette étape ?')) return;
+        
+        try {
+            await apiCall(`/parcours/${id}`, 'DELETE');
+            alert('Étape supprimée !');
+            loadParcours();
+        } catch (error) {
+            console.error('Error deleting parcours item:', error);
+            alert('Erreur lors de la suppression');
         }
     }
 

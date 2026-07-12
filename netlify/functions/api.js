@@ -114,15 +114,185 @@ async function saveContactData(data) {
   }
 }
 
+// Projects CRUD
+async function getProjects() {
+  const result = await client.execute('SELECT * FROM projects ORDER BY order_index, created_at');
+  return result.rows.map(row => ({
+    id: row.id,
+    title: row.title,
+    description: row.description,
+    image_url: row.image_url,
+    tags: row.tags ? JSON.parse(row.tags) : [],
+    link_url: row.link_url,
+    category: row.category,
+    order_index: row.order_index
+  }));
+}
+
+async function getProject(id) {
+  const result = await client.execute({
+    sql: 'SELECT * FROM projects WHERE id = ?',
+    args: [id]
+  });
+  
+  if (result.rows.length === 0) return null;
+  
+  const row = result.rows[0];
+  return {
+    id: row.id,
+    title: row.title,
+    description: row.description,
+    image_url: row.image_url,
+    tags: row.tags ? JSON.parse(row.tags) : [],
+    link_url: row.link_url,
+    category: row.category,
+    order_index: row.order_index
+  };
+}
+
+async function createProject(data) {
+  const result = await client.execute({
+    sql: `INSERT INTO projects (title, description, image_url, tags, link_url, category, order_index) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+    args: [data.title, data.description, data.image_url, JSON.stringify(data.tags || []), data.link_url, data.category, data.order_index || 0]
+  });
+  return result.lastInsertRowid;
+}
+
+async function updateProject(id, data) {
+  await client.execute({
+    sql: `UPDATE projects SET title = ?, description = ?, image_url = ?, tags = ?, link_url = ?, category = ?, order_index = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?`,
+    args: [data.title, data.description, data.image_url, JSON.stringify(data.tags || []), data.link_url, data.category, data.order_index || 0, id]
+  });
+}
+
+async function deleteProject(id) {
+  await client.execute({
+    sql: 'DELETE FROM projects WHERE id = ?',
+    args: [id]
+  });
+}
+
+// Skills CRUD
+async function getSkills() {
+  const result = await client.execute('SELECT * FROM skills ORDER BY order_index, created_at');
+  return result.rows.map(row => ({
+    id: row.id,
+    name: row.name,
+    category: row.category,
+    level: row.level,
+    order_index: row.order_index
+  }));
+}
+
+async function getSkill(id) {
+  const result = await client.execute({
+    sql: 'SELECT * FROM skills WHERE id = ?',
+    args: [id]
+  });
+  
+  if (result.rows.length === 0) return null;
+  
+  const row = result.rows[0];
+  return {
+    id: row.id,
+    name: row.name,
+    category: row.category,
+    level: row.level,
+    order_index: row.order_index
+  };
+}
+
+async function createSkill(data) {
+  const result = await client.execute({
+    sql: `INSERT INTO skills (name, category, level, order_index) VALUES (?, ?, ?, ?)`,
+    args: [data.name, data.category, data.level || 50, data.order_index || 0]
+  });
+  return result.lastInsertRowid;
+}
+
+async function updateSkill(id, data) {
+  await client.execute({
+    sql: `UPDATE skills SET name = ?, category = ?, level = ?, order_index = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?`,
+    args: [data.name, data.category, data.level || 50, data.order_index || 0, id]
+  });
+}
+
+async function deleteSkill(id) {
+  await client.execute({
+    sql: 'DELETE FROM skills WHERE id = ?',
+    args: [id]
+  });
+}
+
+// Parcours CRUD
+async function getParcours() {
+  const result = await client.execute('SELECT * FROM parcours ORDER BY order_index, year DESC');
+  return result.rows.map(row => ({
+    id: row.id,
+    year: row.year,
+    title: row.title,
+    description: row.description,
+    institution: row.institution,
+    type: row.type,
+    order_index: row.order_index
+  }));
+}
+
+async function getParcoursItem(id) {
+  const result = await client.execute({
+    sql: 'SELECT * FROM parcours WHERE id = ?',
+    args: [id]
+  });
+  
+  if (result.rows.length === 0) return null;
+  
+  const row = result.rows[0];
+  return {
+    id: row.id,
+    year: row.year,
+    title: row.title,
+    description: row.description,
+    institution: row.institution,
+    type: row.type,
+    order_index: row.order_index
+  };
+}
+
+async function createParcoursItem(data) {
+  const result = await client.execute({
+    sql: `INSERT INTO parcours (year, title, description, institution, type, order_index) VALUES (?, ?, ?, ?, ?, ?)`,
+    args: [data.year, data.title, data.description, data.institution, data.type, data.order_index || 0]
+  });
+  return result.lastInsertRowid;
+}
+
+async function updateParcoursItem(id, data) {
+  await client.execute({
+    sql: `UPDATE parcours SET year = ?, title = ?, description = ?, institution = ?, type = ?, order_index = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?`,
+    args: [data.year, data.title, data.description, data.institution, data.type, data.order_index || 0, id]
+  });
+}
+
+async function deleteParcoursItem(id) {
+  await client.execute({
+    sql: 'DELETE FROM parcours WHERE id = ?',
+    args: [id]
+  });
+}
+
 // Main handler
 exports.handler = async (event) => {
   const decoded = verifyToken(event);
   
+  // Extract action from path
+  const path = event.path;
+  const pathParts = path.split('/').filter(p => p);
+  const action = pathParts[pathParts.length - 1];
+  const resource = pathParts[pathParts.length - 2] || '';
+  
   // GET endpoints (no auth required for public data)
   if (event.httpMethod === 'GET') {
-    const path = event.path;
-    
-    if (path === '/.netlify/functions/api/ue') {
+    if (resource === 'api' && action === 'ue') {
       const ueData = await getUEData();
       return {
         statusCode: 200,
@@ -130,9 +300,8 @@ exports.handler = async (event) => {
       };
     }
     
-    if (path.startsWith('/.netlify/functions/api/ue/')) {
-      const ueCode = path.split('/').pop();
-      const ueData = await getSingleUE(ueCode);
+    if (resource === 'ue') {
+      const ueData = await getSingleUE(action);
       
       if (!ueData) {
         return {
@@ -147,16 +316,91 @@ exports.handler = async (event) => {
       };
     }
     
-    if (path === '/.netlify/functions/api/contact') {
+    if (resource === 'api' && action === 'contact') {
       const contactData = await getContactData();
       return {
         statusCode: 200,
         body: JSON.stringify(contactData)
       };
     }
+    
+    if (resource === 'api' && action === 'projects') {
+      const projects = await getProjects();
+      return {
+        statusCode: 200,
+        body: JSON.stringify(projects)
+      };
+    }
+    
+    if (resource === 'projects') {
+      const id = parseInt(action);
+      const project = await getProject(id);
+      
+      if (!project) {
+        return {
+          statusCode: 404,
+          body: JSON.stringify({ error: 'Project not found' })
+        };
+      }
+      
+      return {
+        statusCode: 200,
+        body: JSON.stringify(project)
+      };
+    }
+    
+    if (resource === 'api' && action === 'skills') {
+      const skills = await getSkills();
+      return {
+        statusCode: 200,
+        body: JSON.stringify(skills)
+      };
+    }
+    
+    if (resource === 'skills') {
+      const id = parseInt(action);
+      const skill = await getSkill(id);
+      
+      if (!skill) {
+        return {
+          statusCode: 404,
+          body: JSON.stringify({ error: 'Skill not found' })
+        };
+      }
+      
+      return {
+        statusCode: 200,
+        body: JSON.stringify(skill)
+      };
+    }
+    
+    if (resource === 'api' && action === 'parcours') {
+      const parcours = await getParcours();
+      return {
+        statusCode: 200,
+        body: JSON.stringify(parcours)
+      };
+    }
+    
+    if (resource === 'parcours') {
+      const id = parseInt(action);
+      const item = await getParcoursItem(id);
+      
+      if (!item) {
+        return {
+          statusCode: 404,
+          body: JSON.stringify({ error: 'Parcours item not found' })
+        };
+      }
+      
+      return {
+        statusCode: 200,
+        body: JSON.stringify(item)
+      };
+    }
   }
   
-  // POST/PUT endpoints (require auth)
+  // POST/PUT/DELETE endpoints (require auth)
   if (!decoded) {
     return {
       statusCode: 401,
@@ -164,11 +408,10 @@ exports.handler = async (event) => {
     };
   }
   
-  if (event.httpMethod === 'POST' || event.httpMethod === 'PUT') {
-    const path = event.path;
-    const body = JSON.parse(event.body);
+  if (event.httpMethod === 'POST' || event.httpMethod === 'PUT' || event.httpMethod === 'DELETE') {
+    const body = event.body ? JSON.parse(event.body) : {};
     
-    if (path === '/.netlify/functions/api/ue') {
+    if (resource === 'api' && action === 'ue') {
       await saveUEData(body.code, body);
       return {
         statusCode: 200,
@@ -176,17 +419,115 @@ exports.handler = async (event) => {
       };
     }
     
-    if (path === '/.netlify/functions/api/contact') {
+    if (resource === 'ue' && event.httpMethod === 'DELETE') {
+      await client.execute({
+        sql: 'DELETE FROM ue_data WHERE ue_code = ?',
+        args: [action]
+      });
+      return {
+        statusCode: 200,
+        body: JSON.stringify({ success: true })
+      };
+    }
+    
+    if (resource === 'api' && action === 'contact') {
       await saveContactData(body);
       return {
         statusCode: 200,
         body: JSON.stringify({ success: true })
       };
     }
+    
+    // Projects endpoints
+    if (resource === 'api' && action === 'projects') {
+      const id = await createProject(body);
+      return {
+        statusCode: 201,
+        body: JSON.stringify({ success: true, id })
+      };
+    }
+    
+    if (resource === 'projects') {
+      const id = parseInt(action);
+      
+      if (event.httpMethod === 'PUT') {
+        await updateProject(id, body);
+        return {
+          statusCode: 200,
+          body: JSON.stringify({ success: true })
+        };
+      }
+      
+      if (event.httpMethod === 'DELETE') {
+        await deleteProject(id);
+        return {
+          statusCode: 200,
+          body: JSON.stringify({ success: true })
+        };
+      }
+    }
+    
+    // Skills endpoints
+    if (resource === 'api' && action === 'skills') {
+      const id = await createSkill(body);
+      return {
+        statusCode: 201,
+        body: JSON.stringify({ success: true, id })
+      };
+    }
+    
+    if (resource === 'skills') {
+      const id = parseInt(action);
+      
+      if (event.httpMethod === 'PUT') {
+        await updateSkill(id, body);
+        return {
+          statusCode: 200,
+          body: JSON.stringify({ success: true })
+        };
+      }
+      
+      if (event.httpMethod === 'DELETE') {
+        await deleteSkill(id);
+        return {
+          statusCode: 200,
+          body: JSON.stringify({ success: true })
+        };
+      }
+    }
+    
+    // Parcours endpoints
+    if (resource === 'api' && action === 'parcours') {
+      const id = await createParcoursItem(body);
+      return {
+        statusCode: 201,
+        body: JSON.stringify({ success: true, id })
+      };
+    }
+    
+    if (resource === 'parcours') {
+      const id = parseInt(action);
+      
+      if (event.httpMethod === 'PUT') {
+        await updateParcoursItem(id, body);
+        return {
+          statusCode: 200,
+          body: JSON.stringify({ success: true })
+        };
+      }
+      
+      if (event.httpMethod === 'DELETE') {
+        await deleteParcoursItem(id);
+        return {
+          statusCode: 200,
+          body: JSON.stringify({ success: true })
+        };
+      }
+    }
   }
   
   return {
     statusCode: 404,
-    body: JSON.stringify({ error: 'Not found' })
+    body: JSON.stringify({ error: 'Not found', path: path, resource: resource, action: action })
   };
 };
