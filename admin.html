@@ -188,14 +188,34 @@
     <div class="dashboard-header">
         <h1>Dashboard d'administration</h1>
         <p class="cover-sub">Gérez et modifiez le contenu de votre portfolio S4</p>
-        <p style="margin-top:12px; padding:12px 16px; background:#fff3cd; border:1px solid #ffe08a; border-radius:6px; color:#7a5b00; font-size:14px;">
-          ⚠️ Page de démonstration locale sans authentification ni sauvegarde réelle (aucun backend connecté).
-          Elle n'est plus liée depuis la navigation publique du site et ne doit pas être déployée en production
-          sans ajouter un vrai mécanisme d'authentification.
-        </p>
+        <div id="loginSection" style="margin-top:20px;">
+            <div class="admin-card">
+                <h3>Connexion</h3>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label>Identifiant</label>
+                        <input type="text" id="loginUsername" placeholder="admin" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mot de passe</label>
+                        <input type="password" id="loginPassword" placeholder="••••••••" required>
+                    </div>
+                    <div class="admin-actions">
+                        <button type="submit" class="btn-save">Se connecter</button>
+                    </div>
+                </form>
+                <p id="loginError" style="color:#e11d48; margin-top:12px; display:none;">Identifiants incorrects</p>
+            </div>
+        </div>
+        <div id="dashboardContent" style="display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                <p style="color:var(--muted); font-size:14px;">Connecté en tant que <strong id="currentUser"></strong></p>
+                <button onclick="logout()" class="btn-cancel">Déconnexion</button>
+            </div>
+        </div>
     </div>
 
-    <div class="dashboard-nav">
+    <div class="dashboard-nav" id="dashboardNav" style="display:none;">
         <button class="active" onclick="showSection('overview')">Vue d'ensemble</button>
         <button onclick="showSection('ue')">Modifier les UE</button>
         <button onclick="showSection('contact')">Infos contact</button>
@@ -373,6 +393,119 @@
 
 <script src="config.js"></script>
 <script>
+    // API Base URL
+    const API_BASE = '/.netlify/functions';
+    
+    // Token storage
+    let authToken = localStorage.getItem('adminToken');
+    
+    // Check authentication on load
+    window.addEventListener('DOMContentLoaded', async () => {
+        if (authToken) {
+            const isValid = await verifyToken();
+            if (isValid) {
+                showDashboard();
+            } else {
+                logout();
+            }
+        }
+        
+        // Setup login form
+        document.getElementById('loginForm').addEventListener('submit', handleLogin);
+        
+        // Load contact data if authenticated
+        if (authToken) {
+            loadContactData();
+        }
+    });
+    
+    // Login handler
+    async function handleLogin(e) {
+        e.preventDefault();
+        const username = document.getElementById('loginUsername').value;
+        const password = document.getElementById('loginPassword').value;
+        
+        try {
+            const response = await fetch(`${API_BASE}/auth/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok) {
+                authToken = data.token;
+                localStorage.setItem('adminToken', authToken);
+                document.getElementById('currentUser').textContent = data.username;
+                showDashboard();
+                loadContactData();
+            } else {
+                document.getElementById('loginError').style.display = 'block';
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            document.getElementById('loginError').style.display = 'block';
+        }
+    }
+    
+    // Verify token
+    async function verifyToken() {
+        try {
+            const response = await fetch(`${API_BASE}/auth/verify`, {
+                headers: { 'Authorization': `Bearer ${authToken}` }
+            });
+            return response.ok;
+        } catch (error) {
+            return false;
+        }
+    }
+    
+    // Show dashboard
+    function showDashboard() {
+        document.getElementById('loginSection').style.display = 'none';
+        document.getElementById('dashboardContent').style.display = 'block';
+        document.getElementById('dashboardNav').style.display = 'flex';
+        
+        // Show all admin sections
+        document.querySelectorAll('.admin-section').forEach(section => {
+            section.style.display = 'block';
+        });
+    }
+    
+    // Logout
+    function logout() {
+        authToken = null;
+        localStorage.removeItem('adminToken');
+        document.getElementById('loginSection').style.display = 'block';
+        document.getElementById('dashboardContent').style.display = 'none';
+        document.getElementById('dashboardNav').style.display = 'none';
+        document.getElementById('loginForm').reset();
+        document.getElementById('loginError').style.display = 'none';
+        
+        // Hide all admin sections
+        document.querySelectorAll('.admin-section').forEach(section => {
+            section.style.display = 'none';
+        });
+    }
+    
+    // API helper
+    async function apiCall(endpoint, method = 'GET', body = null) {
+        const options = {
+            method,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${authToken}`
+            }
+        };
+        
+        if (body) {
+            options.body = JSON.stringify(body);
+        }
+        
+        const response = await fetch(`${API_BASE}/api${endpoint}`, options);
+        return response.json();
+    }
     // Navigation entre sections
     function showSection(sectionId) {
         // Masquer toutes les sections
@@ -398,13 +531,18 @@
     // Édition UE
     let currentUE = null;
     
-    // Charger les données UE depuis localStorage
-    function loadUEData() {
-        const stored = localStorage.getItem('portfolioUEData');
-        if (stored) {
-            return JSON.parse(stored);
+    // Charger les données UE depuis API
+    async function loadUEData() {
+        try {
+            const data = await apiCall('/ue');
+            if (Object.keys(data).length > 0) {
+                return data;
+            }
+        } catch (error) {
+            console.error('Error loading UE data:', error);
         }
-        // Données par défaut
+        
+        // Données par défaut si API échoue
         return {
             'INF1492': {
                 code: 'INF 1492',
@@ -540,9 +678,8 @@
         });
     }
     
-    function saveUE() {
-        const ueData = loadUEData();
-        ueData[currentUE] = {
+    async function saveUE() {
+        const ueData = {
             code: document.getElementById('ueCode').value,
             title: document.getElementById('ueTitle').value,
             credits: document.getElementById('ueCredits').value,
@@ -551,31 +688,52 @@
             skills: document.getElementById('ueSkills').value,
             bilan: document.getElementById('ueBilan').value
         };
-        localStorage.setItem('portfolioUEData', JSON.stringify(ueData));
-        alert('Modifications enregistrées !');
-        cancelUEEdit();
+        
+        try {
+            await apiCall('/ue', 'POST', ueData);
+            alert('Modifications enregistrées !');
+            cancelUEEdit();
+        } catch (error) {
+            console.error('Error saving UE:', error);
+            alert('Erreur lors de l\'enregistrement');
+        }
     }
 
     // Contact
-    function saveContact() {
+    async function loadContactData() {
+        try {
+            const data = await apiCall('/contact');
+            document.getElementById('adminEmail').value = data.email || '';
+            document.getElementById('adminPhone').value = data.phone || '';
+            document.getElementById('adminLinkedin').value = data.linkedin || '';
+            document.getElementById('adminGithub').value = data.github || '';
+        } catch (error) {
+            console.error('Error loading contact data:', error);
+            // Fallback to config.js
+            if (window.SITE) {
+                document.getElementById('adminEmail').value = window.SITE.email || '';
+                document.getElementById('adminPhone').value = window.SITE.phoneDisplay || '';
+                document.getElementById('adminLinkedin').value = window.SITE.linkedin || '';
+                document.getElementById('adminGithub').value = window.SITE.github || '';
+            }
+        }
+    }
+    
+    async function saveContact() {
         const email = document.getElementById('adminEmail').value;
         const phone = document.getElementById('adminPhone').value;
         const linkedin = document.getElementById('adminLinkedin').value;
         const github = document.getElementById('adminGithub').value;
         
         const contactData = { email, phone, linkedin, github };
-        localStorage.setItem('portfolioContactData', JSON.stringify(contactData));
         
-        // Mettre à jour config.js dynamiquement (pour la session courante)
-        if (window.SITE) {
-            window.SITE.email = email;
-            window.SITE.phone = phone;
-            window.SITE.phoneDisplay = phone;
-            window.SITE.linkedin = linkedin;
-            window.SITE.github = github;
+        try {
+            await apiCall('/contact', 'POST', contactData);
+            alert('Informations de contact mises à jour !');
+        } catch (error) {
+            console.error('Error saving contact:', error);
+            alert('Erreur lors de l\'enregistrement');
         }
-        
-        alert('Informations de contact mises à jour !');
     }
 
     // Statistiques
@@ -618,24 +776,6 @@
         `;
     }
 
-    // Charger les infos contact depuis localStorage ou config.js
-    window.addEventListener('DOMContentLoaded', () => {
-        // Charger depuis localStorage si disponible
-        const storedContact = localStorage.getItem('portfolioContactData');
-        if (storedContact) {
-            const contactData = JSON.parse(storedContact);
-            document.getElementById('adminEmail').value = contactData.email || '';
-            document.getElementById('adminPhone').value = contactData.phone || '';
-            document.getElementById('adminLinkedin').value = contactData.linkedin || '';
-            document.getElementById('adminGithub').value = contactData.github || '';
-        } else if (window.SITE) {
-            // Sinon charger depuis config.js
-            document.getElementById('adminEmail').value = window.SITE.email || '';
-            document.getElementById('adminPhone').value = window.SITE.phoneDisplay || '';
-            document.getElementById('adminLinkedin').value = window.SITE.linkedin || '';
-            document.getElementById('adminGithub').value = window.SITE.github || '';
-        }
-    });
 </script>
 
 </body>
