@@ -88,14 +88,14 @@ async function initDB() {
       )
     `);
     
-    // Create default admin user if not exists (username: admin, password: admin123)
+    // Create default admin user if not exists (username: felicio, password: felicio)
     const bcrypt = require('bcrypt');
-    const passwordHash = await bcrypt.hash('admin123', 10);
+    const passwordHash = await bcrypt.hash('felicio', 10);
     
     try {
       await client.execute({
         sql: 'INSERT INTO users (username, password_hash) VALUES (?, ?)',
-        args: ['admin', passwordHash]
+        args: ['felicio', passwordHash]
       });
     } catch (err) {
       // User already exists
