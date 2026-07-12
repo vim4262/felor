@@ -1,193 +1,199 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Admin — Portfolio EKOE-S4</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@500;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles-variables.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — EKOE Félicio Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@500;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles-variables.css">
 <link rel="stylesheet" href="styles-base.css">
 <link rel="stylesheet" href="styles-components.css">
 <link rel="stylesheet" href="styles-navigation.css">
 <link rel="stylesheet" href="styles-main.css">
-    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js" defer></script>
-    <style>
-        .dashboard-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 40px 32px;
-        }
-        .dashboard-header {
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--line2);
-        }
-        .dashboard-nav {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 32px;
-            flex-wrap: wrap;
-        }
-        .dashboard-nav button {
-            padding: 10px 20px;
-            background: var(--paper3);
-            border: 1px solid var(--line2);
-            color: var(--text);
-            font-family: var(--mono);
-            font-size: 12px;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: all .2s ease;
-        }
-        .dashboard-nav button:hover,
-        .dashboard-nav button.active {
-            background: var(--ink);
-            border-color: var(--ink);
-            color: #fff;
-        }
-        .admin-section {
-            display: none;
-        }
-        .admin-section.active {
-            display: block;
-        }
-        .admin-card {
-            background: var(--paper);
-            border: 1.5px solid var(--line2);
-            border-radius: 6px;
-            padding: 24px;
-            margin-bottom: 20px;
-        }
-        .admin-card h3 {
-            margin-bottom: 16px;
-            color: var(--text);
-        }
-        .form-group {
-            margin-bottom: 16px;
-        }
-        .form-group label {
-            display: block;
-            font-family: var(--mono);
-            font-size: 11px;
-            color: var(--muted);
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 10px 12px;
-            background: var(--paper3);
-            border: 1px solid var(--line2);
-            border-radius: 4px;
-            color: var(--text);
-            font-family: var(--sans);
-            font-size: 14px;
-        }
-        .form-group textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-        .admin-actions {
-            display: flex;
-            gap: 12px;
-            margin-top: 20px;
-        }
-        .btn-save {
-            background: var(--ink);
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: var(--mono);
-            font-size: 12px;
-        }
-        .btn-cancel {
-            background: transparent;
-            color: var(--muted);
-            padding: 10px 20px;
-            border: 1px solid var(--line2);
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: var(--mono);
-            font-size: 12px;
-        }
-        .ue-list-item {
-            background: var(--paper3);
-            border: 1px solid var(--line2);
-            border-radius: 4px;
-            padding: 16px;
-            margin-bottom: 12px;
-            cursor: pointer;
-            transition: all .2s ease;
-        }
-        .ue-list-item:hover {
-            border-color: var(--ink2);
-        }
-        .ue-list-item.active {
-            border-color: var(--accent);
-            background: rgba(45, 212, 191, 0.08);
-        }
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-bottom: 32px;
-        }
-        .stat-card {
-            background: var(--paper3);
-            border: 1px solid var(--line2);
-            border-radius: 6px;
-            padding: 20px;
-            text-align: center;
-        }
-        .stat-number {
-            font-size: 32px;
-            font-weight: 800;
-            color: var(--accent);
-            margin-bottom: 8px;
-        }
-        .stat-label {
-            font-size: 12px;
-            color: var(--muted);
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-        }
-    </style>
+<meta name="description" content="Panel d'administration — Portfolio EKOE Félicio Sécurité Informatique S4">
+<meta name="theme-color" content="#09090B">
+<style>
+    .dashboard-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 40px 32px;
+    }
+    .dashboard-header {
+        margin-bottom: 40px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--line2);
+    }
+    .dashboard-nav {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 32px;
+        flex-wrap: wrap;
+    }
+    .dashboard-nav button {
+        padding: 10px 20px;
+        background: var(--paper3);
+        border: 1px solid var(--line2);
+        color: var(--text);
+        font-family: var(--mono);
+        font-size: 12px;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: all .2s ease;
+    }
+    .dashboard-nav button:hover,
+    .dashboard-nav button.active {
+        background: var(--ink);
+        border-color: var(--ink);
+        color: #fff;
+    }
+    .admin-section {
+        display: none;
+    }
+    .admin-section.active {
+        display: block;
+    }
+    .admin-card {
+        background: var(--paper);
+        border: 1.5px solid var(--line2);
+        border-radius: 6px;
+        padding: 24px;
+        margin-bottom: 20px;
+    }
+    .admin-card h3 {
+        margin-bottom: 16px;
+        color: var(--text);
+    }
+    .form-group {
+        margin-bottom: 16px;
+    }
+    .form-group label {
+        display: block;
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--muted);
+        margin-bottom: 8px;
+        text-transform: uppercase;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        width: 100%;
+        padding: 10px 12px;
+        background: var(--paper3);
+        border: 1px solid var(--line2);
+        border-radius: 4px;
+        color: var(--text);
+        font-family: var(--sans);
+        font-size: 14px;
+    }
+    .form-group textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+    .admin-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 20px;
+    }
+    .btn-save {
+        background: var(--ink);
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-family: var(--mono);
+        font-size: 12px;
+    }
+    .btn-cancel {
+        background: transparent;
+        color: var(--muted);
+        padding: 10px 20px;
+        border: 1px solid var(--line2);
+        border-radius: 4px;
+        cursor: pointer;
+        font-family: var(--mono);
+        font-size: 12px;
+    }
+    .ue-list-item {
+        background: var(--paper3);
+        border: 1px solid var(--line2);
+        border-radius: 4px;
+        padding: 16px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        transition: all .2s ease;
+    }
+    .ue-list-item:hover {
+        border-color: var(--ink2);
+    }
+    .ue-list-item.active {
+        border-color: var(--accent);
+        background: rgba(45, 212, 191, 0.08);
+    }
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        margin-bottom: 32px;
+    }
+    .stat-card {
+        background: var(--paper3);
+        border: 1px solid var(--line2);
+        border-radius: 6px;
+        padding: 20px;
+        text-align: center;
+    }
+    .stat-number {
+        font-size: 32px;
+        font-weight: 800;
+        color: var(--accent);
+        margin-bottom: 8px;
+    }
+    .stat-label {
+        font-size: 12px;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+    }
+</style>
 </head>
 <body>
 
 <canvas id="particles" aria-hidden="true"></canvas>
 
+<a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
 <div class="case-bar">
   <div class="wrap">
     <span>Portfolio N° EKOE-S4-2026 <span class="blink">_</span></span>
-    <span>Dashboard Admin</span>
+    <span>Admin</span>
   </div>
 </div>
 
-<nav id="navbar">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">EKOE<span class="ref">/S4</span></a>
-    <div class="tab-row">
-      <a href="index.html" class="tab">Accueil</a>
-      <a href="competences.html" class="tab">Compétences</a>
-      <a href="projets.html" class="tab">Projets</a>
-      <a href="parcours.html" class="tab">Parcours</a>
-      <a href="contact.html" class="tab">Contact</a>
+<nav class="main-nav">
+  <div class="nav-content">
+    <a href="index.html" class="nav-logo">EKOE<span class="highlight">.portfolio</span></a>
+    <div class="nav-links">
+      <a href="index.html">Accueil</a>
+      <a href="parcours.html">Parcours</a>
+      <a href="competences.html">Compétences</a>
+      <a href="projets.html">Projets</a>
+      <a href="contact.html">Contact</a>
+      <a href="admin.html" class="active">Admin</a>
     </div>
   </div>
 </nav>
 
 <div class="nav-bottom-rule"></div>
 
-<div class="dashboard-container">
+<main id="main-content" class="dashboard-container">
     <div class="dashboard-header">
         <h1>Dashboard d'administration</h1>
         <p class="cover-sub">Gérez et modifiez le contenu de votre portfolio S4</p>
+        
         <div id="loginSection" style="margin-top:20px;">
             <div class="admin-card">
                 <h3>Connexion sécurisée</h3>
@@ -207,6 +213,7 @@
                 <p id="loginError" style="color:#e11d48; margin-top:12px; display:none;">Identifiants incorrects</p>
             </div>
         </div>
+        
         <div id="dashboardContent" style="display:none;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
                 <p style="color:var(--muted); font-size:14px;">Connecté en tant que <strong id="currentUser"></strong></p>
@@ -218,11 +225,7 @@
     <div class="dashboard-nav" id="dashboardNav" style="display:none;">
         <button class="active" onclick="showSection('overview')">Vue d'ensemble</button>
         <button onclick="showSection('ue')">Modifier les UE</button>
-        <button onclick="showSection('projects')">Projets</button>
-        <button onclick="showSection('skills')">Compétences</button>
-        <button onclick="showSection('parcours')">Parcours</button>
         <button onclick="showSection('contact')">Infos contact</button>
-        <button onclick="showSection('stats')">Statistiques</button>
     </div>
 
     <!-- Section Vue d'ensemble -->
@@ -261,39 +264,7 @@
         <div class="admin-card">
             <h3>Sélectionnez une UE à modifier</h3>
             <div id="ueList">
-                <div class="ue-list-item" onclick="editUE('INF1492')">
-                    <strong>INF 1492</strong> — Circuits numériques (4 cr)
-                </div>
-                <div class="ue-list-item" onclick="editUE('INF1491')">
-                    <strong>INF 1491</strong> — Cryptologie (3 cr)
-                </div>
-                <div class="ue-list-item" onclick="editUE('MTH1420')">
-                    <strong>MTH 1420</strong> — Rech. opér. & analyse num. (5 cr)
-                </div>
-                <div class="ue-list-item" onclick="editUE('INF1493')">
-                    <strong>INF 1493</strong> — Forensique & ing. sociale (2 cr)
-                </div>
-                <div class="ue-list-item" onclick="editUE('INF1423')">
-                    <strong>INF 1423</strong> — Algorithmique & SD (5 cr)
-                </div>
-                <div class="ue-list-item" onclick="editUE('INF1490')">
-                    <strong>INF 1490</strong> — Admin. systèmes d'exploitation (5 cr)
-                </div>
-                <div class="ue-list-item" onclick="editUE('RSI409')">
-                    <strong>RSI 409</strong> — Sécurité réseaux LAN (1.5 cr)
-                </div>
-                <div class="ue-list-item" onclick="editUE('RSI411')">
-                    <strong>RSI 411</strong> — Sécurisation services réseau (1.5 cr)
-                </div>
-                <div class="ue-list-item" onclick="editUE('SAESI401')">
-                    <strong>SAESI 401</strong> — SAE intégratrice (0.5 cr)
-                </div>
-                <div class="ue-list-item" onclick="editUE('STAGE')">
-                    <strong>Stage</strong> — Stage professionnel (2 cr)
-                </div>
-                <div class="ue-list-item" onclick="editUE('PORTSI4')">
-                    <strong>PORTSI 4</strong> — Portfolio numérique (0.5 cr)
-                </div>
+                <p>Chargement des UE...</p>
             </div>
         </div>
 
@@ -302,190 +273,35 @@
             <form id="ueForm">
                 <div class="form-group">
                     <label>Code UE</label>
-                    <input type="text" id="ueCode" placeholder="Ex: INF 1492">
+                    <input type="text" id="ueCode" readonly>
                 </div>
                 <div class="form-group">
                     <label>Titre</label>
-                    <input type="text" id="ueTitle" placeholder="Titre de l'UE">
+                    <input type="text" id="ueTitle" required>
                 </div>
                 <div class="form-group">
                     <label>Crédits</label>
-                    <input type="text" id="ueCredits" placeholder="Ex: 4">
+                    <input type="text" id="ueCredits" required>
                 </div>
                 <div class="form-group">
                     <label>Description courte</label>
-                    <textarea id="ueDesc" placeholder="Description courte de l'UE"></textarea>
+                    <textarea id="ueDesc" required></textarea>
                 </div>
                 <div class="form-group">
                     <label>Preuves</label>
-                    <input type="text" id="ueProof" placeholder="Ex: 4 crédits · TP réussi">
+                    <input type="text" id="ueProof">
                 </div>
                 <div class="form-group">
                     <label>Compétences acquises</label>
-                    <textarea id="ueSkills" placeholder="Liste des compétences acquises"></textarea>
+                    <textarea id="ueSkills"></textarea>
                 </div>
                 <div class="form-group">
                     <label>Bilan UE</label>
-                    <textarea id="ueBilan" placeholder="Votre bilan personnel de cette UE"></textarea>
+                    <textarea id="ueBilan"></textarea>
                 </div>
                 <div class="admin-actions">
                     <button type="button" class="btn-save" onclick="saveUE()">Enregistrer</button>
                     <button type="button" class="btn-cancel" onclick="cancelUEEdit()">Annuler</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Section Projets -->
-    <div id="section-projects" class="admin-section">
-        <div class="admin-card">
-            <h3>Gestion des projets</h3>
-            <div class="admin-actions" style="margin-bottom:20px;">
-                <button class="btn-save" onclick="showProjectForm()">+ Ajouter un projet</button>
-            </div>
-            <div id="projectsList">
-                <p>Chargement des projets...</p>
-            </div>
-        </div>
-
-        <div id="projectForm" class="admin-card" style="display:none;">
-            <h3 id="projectFormTitle">Ajouter un projet</h3>
-            <form id="projectFormElement">
-                <input type="hidden" id="projectId">
-                <div class="form-group">
-                    <label>Titre</label>
-                    <input type="text" id="projectTitle" required>
-                </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    <textarea id="projectDescription" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label>URL de l'image</label>
-                    <input type="text" id="projectImageUrl">
-                </div>
-                <div class="form-group">
-                    <label>Tags (séparés par des virgules)</label>
-                    <input type="text" id="projectTags">
-                </div>
-                <div class="form-group">
-                    <label>Lien du projet</label>
-                    <input type="text" id="projectLinkUrl">
-                </div>
-                <div class="form-group">
-                    <label>Catégorie</label>
-                    <select id="projectCategory">
-                        <option value="sae">SAE</option>
-                        <option value="perso">Personnel</option>
-                        <option value="tp">TP</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Ordre d'affichage</label>
-                    <input type="number" id="projectOrderIndex" value="0">
-                </div>
-                <div class="admin-actions">
-                    <button type="button" class="btn-save" onclick="saveProject()">Enregistrer</button>
-                    <button type="button" class="btn-cancel" onclick="hideProjectForm()">Annuler</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Section Compétences -->
-    <div id="section-skills" class="admin-section">
-        <div class="admin-card">
-            <h3>Gestion des compétences</h3>
-            <div class="admin-actions" style="margin-bottom:20px;">
-                <button class="btn-save" onclick="showSkillForm()">+ Ajouter une compétence</button>
-            </div>
-            <div id="skillsList">
-                <p>Chargement des compétences...</p>
-            </div>
-        </div>
-
-        <div id="skillForm" class="admin-card" style="display:none;">
-            <h3 id="skillFormTitle">Ajouter une compétence</h3>
-            <form id="skillFormElement">
-                <input type="hidden" id="skillId">
-                <div class="form-group">
-                    <label>Nom</label>
-                    <input type="text" id="skillName" required>
-                </div>
-                <div class="form-group">
-                    <label>Catégorie</label>
-                    <select id="skillCategory">
-                        <option value="reseaux">Réseaux</option>
-                        <option value="securite">Sécurité</option>
-                        <option value="dev">Développement</option>
-                        <option value="systeme">Système</option>
-                        <option value="autre">Autre</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Niveau (0-100)</label>
-                    <input type="number" id="skillLevel" min="0" max="100" value="50">
-                </div>
-                <div class="form-group">
-                    <label>Ordre d'affichage</label>
-                    <input type="number" id="skillOrderIndex" value="0">
-                </div>
-                <div class="admin-actions">
-                    <button type="button" class="btn-save" onclick="saveSkill()">Enregistrer</button>
-                    <button type="button" class="btn-cancel" onclick="hideSkillForm()">Annuler</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Section Parcours -->
-    <div id="section-parcours" class="admin-section">
-        <div class="admin-card">
-            <h3>Gestion du parcours</h3>
-            <div class="admin-actions" style="margin-bottom:20px;">
-                <button class="btn-save" onclick="showParcoursForm()">+ Ajouter une étape</button>
-            </div>
-            <div id="parcoursList">
-                <p>Chargement du parcours...</p>
-            </div>
-        </div>
-
-        <div id="parcoursForm" class="admin-card" style="display:none;">
-            <h3 id="parcoursFormTitle">Ajouter une étape</h3>
-            <form id="parcoursFormElement">
-                <input type="hidden" id="parcoursId">
-                <div class="form-group">
-                    <label>Année</label>
-                    <input type="text" id="parcoursYear" placeholder="Ex: 2025-26" required>
-                </div>
-                <div class="form-group">
-                    <label>Titre</label>
-                    <input type="text" id="parcoursTitle" required>
-                </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    <textarea id="parcoursDescription"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Institution</label>
-                    <input type="text" id="parcoursInstitution">
-                </div>
-                <div class="form-group">
-                    <label>Type</label>
-                    <select id="parcoursType">
-                        <option value="formation">Formation</option>
-                        <option value="stage">Stage</option>
-                        <option value="certification">Certification</option>
-                        <option value="autre">Autre</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Ordre d'affichage</label>
-                    <input type="number" id="parcoursOrderIndex" value="0">
-                </div>
-                <div class="admin-actions">
-                    <button type="button" class="btn-save" onclick="saveParcours()">Enregistrer</button>
-                    <button type="button" class="btn-cancel" onclick="hideParcoursForm()">Annuler</button>
                 </div>
             </form>
         </div>
@@ -518,342 +334,252 @@
             </form>
         </div>
     </div>
+</main>
 
-    <!-- Section Statistiques -->
-    <div id="section-stats" class="admin-section">
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-number">11</div>
-                <div class="stat-label">Unités d'enseignement</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">30</div>
-                <div class="stat-label">Crédits totaux</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">5</div>
-                <div class="stat-label">Pages du site</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">360h</div>
-                <div class="stat-label">Volume de formation</div>
-            </div>
-        </div>
-
-        <div class="admin-card">
-            <h3>Détails par UE</h3>
-            <div id="ueStats">
-                <p>Chargement des statistiques...</p>
-            </div>
-        </div>
-    </div>
-</div>
+<footer>
+  <div class="wrap">
+    <p>© 2026 EKOE Félicio — Portfolio Sécurité Informatique S4</p>
+  </div>
+</footer>
 
 <script src="config.js"></script>
+<script src="particles.js"></script>
 <script>
-    // API Base URL
-    const API_BASE = '/.netlify/functions';
-    
-    // Token storage
-    let authToken = localStorage.getItem('adminToken');
-    
-    // Check authentication on load
-    window.addEventListener('DOMContentLoaded', async () => {
-        if (authToken) {
-            const isValid = await verifyToken();
-            if (isValid) {
-                showDashboard();
-            } else {
-                logout();
-            }
+    // Simple localStorage-based admin panel
+    const ADMIN_CREDENTIALS = { username: 'felicio', password: 'felicio' };
+    let isAuthenticated = localStorage.getItem('adminAuthenticated') === 'true';
+    let currentUE = null;
+
+    // Default UE data
+    const defaultUEData = {
+        'INF1492': {
+            code: 'INF 1492',
+            title: 'Logique combinatoire & séquentielle',
+            credits: '4',
+            desc: 'Conception de circuits logiques de base en travaux dirigés et TP.',
+            proof: '4 crédits · schémas portes logiques & bascules conçus',
+            skills: 'Conception de circuits combinatoires et séquentiels, tables de vérité, simulation logique',
+            bilan: 'Bonne maîtrise des fondamentaux de l\'électronique numérique, bases solides pour le matériel'
+        },
+        'INF1491': {
+            code: 'INF 1491',
+            title: 'Mise en œuvre & prise d\'empreintes',
+            credits: '3',
+            desc: 'Implémentation de chiffrements classiques et premiers pas en CTF.',
+            proof: '3 crédits · algorithmes implémentés',
+            skills: 'Chiffrement symétrique/asymétrique, hachage, empreintes numériques, cryptanalyse basique',
+            bilan: 'J\'ai commencé par coder les algorithmes classiques presque mécaniquement, avant de vraiment comprendre pourquoi chiffrement et hachage ne répondent pas au même besoin.'
+        },
+        'MTH1420': {
+            code: 'MTH 1420',
+            title: 'Optimisation & résolution numérique',
+            credits: '5',
+            desc: 'Recherche opérationnelle et implémentation Python de méthodes numériques.',
+            proof: '5 crédits · scripts Python',
+            skills: 'Résolution numérique d\'équations, méthodes d\'optimisation, implémentation Python',
+            bilan: 'Au début, Newton-Raphson et la bissection n\'étaient pour moi que des formules à appliquer ; c\'est en les codant en Python que j\'ai compris qu\'il s\'agit surtout d\'une façon de raisonner.'
+        },
+        'INF1493': {
+            code: 'INF 1493',
+            title: 'Investigation & manipulation humaine',
+            credits: '2',
+            desc: 'Analyse de cas concrets de manipulation et méthodologie d\'investigation.',
+            proof: '2 crédits · cas analysés',
+            skills: 'Méthodologie d\'investigation, analyse de traces, identification d\'attaques sociales',
+            bilan: 'Étudier des cas réels de phishing m\'a fait réaliser que la faille la plus exploitée n\'est presque jamais technique, mais humaine.'
+        },
+        'INF1423': {
+            code: 'INF 1423',
+            title: 'Complexité & structures de données',
+            credits: '5',
+            desc: 'Analyse de complexité d\'algorithmes de tri et structures classiques.',
+            proof: '5 crédits · algorithmes implémentés',
+            skills: 'Analyse de complexité, structures de données classiques, algorithmes de tri',
+            bilan: 'Comparer les complexités des algorithmes de tri m\'a obligé à sortir du simple « ça marche » pour me demander « est-ce que ça tient à l\'échelle ».'
+        },
+        'INF1490': {
+            code: 'INF 1490',
+            title: 'Windows Server & Linux',
+            credits: '5',
+            desc: 'Administration, gestion et automatisation sur environnements Windows et Linux.',
+            proof: '5 crédits · scripts & configurations',
+            skills: 'Administration Windows Server, administration Linux, scripting PowerShell',
+            bilan: 'Basculer entre Windows Server et Linux sur les mêmes TP m\'a appris à ne pas raisonner « un seul OS », mais à comparer.'
+        },
+        'RSI409': {
+            code: 'RSI 409',
+            title: 'Segmentation & durcissement LAN',
+            credits: '1.5',
+            desc: 'Configuration pare-feu, VLAN et règles de filtrage sur lab réseau.',
+            proof: '1.5 crédits · configurations validées',
+            skills: 'Segmentation VLAN, configuration pare-feu, durcissement réseau',
+            bilan: 'Configurer une segmentation VLAN sur FortiGate m\'a fait comprendre concrètement que segmenter un réseau n\'est pas une case à cocher mais une vraie décision de sécurité.'
+        },
+        'RSI411': {
+            code: 'RSI 411',
+            title: 'Durcissement des services',
+            credits: '1.5',
+            desc: 'Sécurisation de services réseau (DNS, messagerie, accès distants) en TP.',
+            proof: '1.5 crédits · services sécurisés',
+            skills: 'Durcissement DNS, sécurisation messagerie, protection accès distants',
+            bilan: 'Durcir DNS, messagerie et accès distants m\'a montré que sécuriser un réseau ne s\'arrête pas au pare-feu : chaque service ouvert est une porte à part entière.'
+        },
+        'SAESI401': {
+            code: 'SAESI 401',
+            title: 'Sécuriser un système d\'information',
+            credits: '0.5',
+            desc: 'Projet intégrateur : lab complet de sécurisation d\'un SI, documenté de bout en bout.',
+            proof: '0.5 crédits · lab documenté',
+            skills: 'Mobilisation transversale des UE, documentation technique, résolution problèmes complexes',
+            bilan: 'C\'est la première fois que j\'ai dû tenir un projet du début à la fin avec ses imprévus : la virtualisation imbriquée GNS3/VMware qui plante sans raison évidente.'
+        },
+        'STAGE': {
+            code: 'Stage',
+            title: 'Stage & rapport de stage',
+            credits: '2',
+            desc: 'Immersion en entreprise avec restitution écrite et orale des acquis S4.',
+            proof: '2 crédits · rapport de stage',
+            skills: 'Application professionnelle des compétences SI, communication technique',
+            bilan: 'Sortir du cadre des TP pour affronter de vraies contraintes d\'entreprise m\'a montré la différence entre « savoir faire » un exercice et « savoir faire » face à des délais.'
+        },
+        'PORTSI4': {
+            code: 'PORTSI 4',
+            title: 'Portfolio numérique S4',
+            credits: '0.5',
+            desc: 'Ce site : valorisation structurée des compétences, projets et parcours du semestre.',
+            proof: '0.5 crédits · site déployé',
+            skills: 'Documentation structurée, présentation professionnelle, valorisation des acquis',
+            bilan: 'Coder ce portfolio à la main plutôt qu\'avec un générateur m\'a obligé à comprendre chaque choix : pourquoi cette structure sémantique, pourquoi cette hiérarchie CSS.'
         }
-        
-        // Setup login form
+    };
+
+    // Default contact data
+    const defaultContactData = {
+        email: window.SITE?.email || 'ekoe.felicio@example.com',
+        phone: window.SITE?.phoneDisplay || '+228 XX XX XX XX XX',
+        linkedin: window.SITE?.linkedin || 'https://linkedin.com/in/ekoe-felicio',
+        github: window.SITE?.github || 'https://github.com/ekoe-felicio'
+    };
+
+    // LocalStorage helpers
+    function saveData(key, data) {
+        localStorage.setItem(key, JSON.stringify(data));
+    }
+
+    function loadData(key, defaultValue = null) {
+        const data = localStorage.getItem(key);
+        return data ? JSON.parse(data) : defaultValue;
+    }
+
+    // Authentication
+    window.addEventListener('DOMContentLoaded', () => {
+        if (isAuthenticated) {
+            showDashboard();
+        }
         document.getElementById('loginForm').addEventListener('submit', handleLogin);
+        
+        // Initialize particles if available
+        if (typeof initParticles === 'function') {
+            initParticles();
+        }
     });
-    
-    // Login handler
-    async function handleLogin(e) {
+
+    function handleLogin(e) {
         e.preventDefault();
         const username = document.getElementById('loginUsername').value;
         const password = document.getElementById('loginPassword').value;
-        
-        try {
-            const response = await fetch(`${API_BASE}/auth/login`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password })
-            });
-            
-            const data = await response.json();
-            
-            if (response.ok) {
-                authToken = data.token;
-                localStorage.setItem('adminToken', authToken);
-                document.getElementById('currentUser').textContent = data.username;
-                showDashboard();
-            } else {
-                document.getElementById('loginError').textContent = data.error || 'Erreur de connexion';
-                document.getElementById('loginError').style.display = 'block';
-            }
-        } catch (error) {
-            console.error('Login error:', error);
-            document.getElementById('loginError').textContent = 'Erreur réseau: ' + error.message;
+
+        if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+            isAuthenticated = true;
+            localStorage.setItem('adminAuthenticated', 'true');
+            document.getElementById('currentUser').textContent = username;
+            showDashboard();
+        } else {
             document.getElementById('loginError').style.display = 'block';
         }
     }
-    
-    // Verify token
-    async function verifyToken() {
-        try {
-            const response = await fetch(`${API_BASE}/auth/verify`, {
-                headers: { 'Authorization': `Bearer ${authToken}` }
-            });
-            return response.ok;
-        } catch (error) {
-            return false;
-        }
-    }
-    
-    // Show dashboard
+
     function showDashboard() {
         document.getElementById('loginSection').style.display = 'none';
         document.getElementById('dashboardContent').style.display = 'block';
         document.getElementById('dashboardNav').style.display = 'flex';
-        
-        // Show all admin sections
         document.querySelectorAll('.admin-section').forEach(section => {
             section.style.display = 'block';
         });
+        renderUEList();
+        loadContactData();
     }
-    
-    // Logout
+
     function logout() {
-        authToken = null;
-        localStorage.removeItem('adminToken');
+        isAuthenticated = false;
+        localStorage.removeItem('adminAuthenticated');
         document.getElementById('loginSection').style.display = 'block';
         document.getElementById('dashboardContent').style.display = 'none';
         document.getElementById('dashboardNav').style.display = 'none';
         document.getElementById('loginForm').reset();
         document.getElementById('loginError').style.display = 'none';
-        
-        // Hide all admin sections
         document.querySelectorAll('.admin-section').forEach(section => {
             section.style.display = 'none';
         });
     }
-    
-    // API helper with authentication
-    async function apiCall(endpoint, method = 'GET', body = null) {
-        const options = {
-            method,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${authToken}`
-            }
-        };
-        
-        if (body) {
-            options.body = JSON.stringify(body);
-        }
-        
-        try {
-            const response = await fetch(`${API_BASE}/api${endpoint}`, options);
-            
-            if (response.status === 401) {
-                logout();
-                return null;
-            }
-            
-            return await response.json();
-        } catch (error) {
-            console.error('API call failed:', error);
-            return null;
-        }
-    }
-    // Navigation entre sections
+
+    // Navigation
     function showSection(sectionId) {
-        // Masquer toutes les sections
         document.querySelectorAll('.admin-section').forEach(section => {
             section.classList.remove('active');
         });
-        
-        // Afficher la section sélectionnée
         document.getElementById('section-' + sectionId).classList.add('active');
-        
-        // Mettre à jour les boutons de navigation
         document.querySelectorAll('.dashboard-nav button').forEach(btn => {
             btn.classList.remove('active');
         });
         event.target.classList.add('active');
         
-        // Charger les données si nécessaire
-        if (sectionId === 'stats') {
-            loadUEStats();
+        if (sectionId === 'ue') {
+            renderUEList();
         }
-        if (sectionId === 'projects') {
-            loadProjects();
-        }
-        if (sectionId === 'skills') {
-            loadSkills();
-        }
-        if (sectionId === 'parcours') {
-            loadParcours();
+        if (sectionId === 'contact') {
+            loadContactData();
         }
     }
 
-    // Édition UE
-    let currentUE = null;
-    
-    // Charger les données UE depuis API
-    async function loadUEData() {
-        try {
-            const data = await apiCall('/ue');
-            if (Object.keys(data).length > 0) {
-                return data;
-            }
-        } catch (error) {
-            console.error('Error loading UE data:', error);
+    // UE Management
+    function renderUEList() {
+        const ueData = loadData('ueData', defaultUEData);
+        const container = document.getElementById('ueList');
+        container.innerHTML = Object.entries(ueData).map(([code, ue]) => `
+            <div class="ue-list-item" onclick="editUE('${code}')">
+                <strong>${ue.code}</strong> — ${ue.title}
+                <br><small style="color:var(--muted);">${ue.credits} crédits</small>
+            </div>
+        `).join('');
+    }
+
+    function editUE(ueCode) {
+        currentUE = ueCode;
+        const ueData = loadData('ueData', defaultUEData);
+        
+        if (ueData[ueCode]) {
+            document.getElementById('ueCode').value = ueData[ueCode].code;
+            document.getElementById('ueTitle').value = ueData[ueCode].title;
+            document.getElementById('ueCredits').value = ueData[ueCode].credits;
+            document.getElementById('ueDesc').value = ueData[ueCode].desc;
+            document.getElementById('ueProof').value = ueData[ueCode].proof;
+            document.getElementById('ueSkills').value = ueData[ueCode].skills;
+            document.getElementById('ueBilan').value = ueData[ueCode].bilan;
         }
         
-        // Données par défaut si API échoue
-        return {
-            'INF1492': {
-                code: 'INF 1492',
-                title: 'Logique combinatoire & séquentielle',
-                credits: '4',
-                desc: 'Conception de circuits logiques de base en travaux dirigés et TP.',
-                proof: '4 crédits · schémas portes logiques & bascules conçus',
-                skills: 'Conception de circuits combinatoires et séquentiels, tables de vérité, simulation logique',
-                bilan: 'Bonne maîtrise des fondamentaux de l\'électronique numérique, bases solides pour le matériel'
-            },
-            'INF1491': {
-                code: 'INF 1491',
-                title: 'Mise en œuvre & prise d\'empreintes',
-                credits: '3',
-                desc: 'Implémentation de chiffrements classiques et premiers pas en CTF.',
-                proof: '3 crédits · algorithmes implémentés',
-                skills: 'Chiffrement symétrique/asymétrique, hachage, empreintes numériques, cryptanalyse basique',
-                bilan: 'J\'ai commencé par coder les algorithmes classiques presque mécaniquement, avant de vraiment comprendre pourquoi chiffrement et hachage ne répondent pas au même besoin.'
-            },
-            'MTH1420': {
-                code: 'MTH 1420',
-                title: 'Optimisation & résolution numérique',
-                credits: '5',
-                desc: 'Recherche opérationnelle et implémentation Python de méthodes numériques.',
-                proof: '5 crédits · scripts Python',
-                skills: 'Résolution numérique d\'équations, méthodes d\'optimisation, implémentation Python',
-                bilan: 'Au début, Newton-Raphson et la bissection n\'étaient pour moi que des formules à appliquer ; c\'est en les codant en Python que j\'ai compris qu\'il s\'agit surtout d\'une façon de raisonner.'
-            },
-            'INF1493': {
-                code: 'INF 1493',
-                title: 'Investigation & manipulation humaine',
-                credits: '2',
-                desc: 'Analyse de cas concrets de manipulation et méthodologie d\'investigation.',
-                proof: '2 crédits · cas analysés',
-                skills: 'Méthodologie d\'investigation, analyse de traces, identification d\'attaques sociales',
-                bilan: 'Étudier des cas réels de phishing m\'a fait réaliser que la faille la plus exploitée n\'est presque jamais technique, mais humaine.'
-            },
-            'INF1423': {
-                code: 'INF 1423',
-                title: 'Complexité & structures de données',
-                credits: '5',
-                desc: 'Analyse de complexité d\'algorithmes de tri et structures classiques.',
-                proof: '5 crédits · algorithmes implémentés',
-                skills: 'Analyse de complexité, structures de données classiques, algorithmes de tri',
-                bilan: 'Comparer les complexités des algorithmes de tri m\'a obligé à sortir du simple « ça marche » pour me demander « est-ce que ça tient à l\'échelle ».'
-            },
-            'INF1490': {
-                code: 'INF 1490',
-                title: 'Windows Server & Linux',
-                credits: '5',
-                desc: 'Administration, gestion et automatisation sur environnements Windows et Linux.',
-                proof: '5 crédits · scripts & configurations',
-                skills: 'Administration Windows Server, administration Linux, scripting PowerShell',
-                bilan: 'Basculer entre Windows Server et Linux sur les mêmes TP m\'a appris à ne pas raisonner « un seul OS », mais à comparer.'
-            },
-            'RSI409': {
-                code: 'RSI 409',
-                title: 'Segmentation & durcissement LAN',
-                credits: '1.5',
-                desc: 'Configuration pare-feu, VLAN et règles de filtrage sur lab réseau.',
-                proof: '1.5 crédits · configurations validées',
-                skills: 'Segmentation VLAN, configuration pare-feu, durcissement réseau',
-                bilan: 'Configurer une segmentation VLAN sur FortiGate m\'a fait comprendre concrètement que segmenter un réseau n\'est pas une case à cocher mais une vraie décision de sécurité.'
-            },
-            'RSI411': {
-                code: 'RSI 411',
-                title: 'Durcissement des services',
-                credits: '1.5',
-                desc: 'Sécurisation de services réseau (DNS, messagerie, accès distants) en TP.',
-                proof: '1.5 crédits · services sécurisés',
-                skills: 'Durcissement DNS, sécurisation messagerie, protection accès distants',
-                bilan: 'Durcir DNS, messagerie et accès distants m\'a montré que sécuriser un réseau ne s\'arrête pas au pare-feu : chaque service ouvert est une porte à part entière.'
-            },
-            'SAESI401': {
-                code: 'SAESI 401',
-                title: 'Sécuriser un système d\'information',
-                credits: '0.5',
-                desc: 'Projet intégrateur : lab complet de sécurisation d\'un SI, documenté de bout en bout.',
-                proof: '0.5 crédits · lab documenté',
-                skills: 'Mobilisation transversale des UE, documentation technique, résolution problèmes complexes',
-                bilan: 'C\'est la première fois que j\'ai dû tenir un projet du début à la fin avec ses imprévus : la virtualisation imbriquée GNS3/VMware qui plante sans raison évidente.'
-            },
-            'STAGE': {
-                code: 'Stage',
-                title: 'Stage & rapport de stage',
-                credits: '2',
-                desc: 'Immersion en entreprise avec restitution écrite et orale des acquis S4.',
-                proof: '2 crédits · rapport de stage',
-                skills: 'Application professionnelle des compétences SI, communication technique',
-                bilan: 'Sortir du cadre des TP pour affronter de vraies contraintes d\'entreprise m\'a montré la différence entre « savoir faire » un exercice et « savoir faire » face à des délais.'
-            },
-            'PORTSI4': {
-                code: 'PORTSI 4',
-                title: 'Portfolio numérique S4',
-                credits: '0.5',
-                desc: 'Ce site : valorisation structurée des compétences, projets et parcours du semestre.',
-                proof: '0.5 crédits · site déployé',
-                skills: 'Documentation structurée, présentation professionnelle, valorisation des acquis',
-                bilan: 'Coder ce portfolio à la main plutôt qu\'avec un générateur m\'a obligé à comprendre chaque choix : pourquoi cette structure sémantique, pourquoi cette hiérarchie CSS.'
-            }
-        };
-    }
-    
-    function editUE(ueId) {
-        currentUE = ueId;
         document.getElementById('ueEditor').style.display = 'block';
-        
-        const ueData = loadUEData();
-        
-        if (ueData[ueId]) {
-            document.getElementById('ueCode').value = ueData[ueId].code;
-            document.getElementById('ueTitle').value = ueData[ueId].title;
-            document.getElementById('ueCredits').value = ueData[ueId].credits;
-            document.getElementById('ueDesc').value = ueData[ueId].desc;
-            document.getElementById('ueProof').value = ueData[ueId].proof;
-            document.getElementById('ueSkills').value = ueData[ueId].skills;
-            document.getElementById('ueBilan').value = ueData[ueId].bilan;
-        }
-        
-        // Mettre en surbrillance l'UE sélectionnée
-        document.querySelectorAll('.ue-list-item').forEach(item => {
-            item.classList.remove('active');
-        });
-        event.target.classList.add('active');
     }
-    
+
     function cancelUEEdit() {
         document.getElementById('ueEditor').style.display = 'none';
         currentUE = null;
         document.getElementById('ueForm').reset();
-        document.querySelectorAll('.ue-list-item').forEach(item => {
-            item.classList.remove('active');
-        });
     }
-    
-    async function saveUE() {
-        const ueData = {
+
+    function saveUE() {
+        const ueData = loadData('ueData', defaultUEData);
+        ueData[currentUE] = {
             code: document.getElementById('ueCode').value,
             title: document.getElementById('ueTitle').value,
             credits: document.getElementById('ueCredits').value,
@@ -862,387 +588,31 @@
             skills: document.getElementById('ueSkills').value,
             bilan: document.getElementById('ueBilan').value
         };
-        
-        try {
-            await apiCall('/ue', 'POST', ueData);
-            alert('Modifications enregistrées !');
-            cancelUEEdit();
-        } catch (error) {
-            console.error('Error saving UE:', error);
-            alert('Erreur lors de l\'enregistrement');
-        }
+        saveData('ueData', ueData);
+        alert('UE enregistrée !');
+        cancelUEEdit();
+        renderUEList();
     }
 
-    // Contact
-    async function loadContactData() {
-        try {
-            const data = await apiCall('/contact');
-            document.getElementById('adminEmail').value = data.email || '';
-            document.getElementById('adminPhone').value = data.phone || '';
-            document.getElementById('adminLinkedin').value = data.linkedin || '';
-            document.getElementById('adminGithub').value = data.github || '';
-        } catch (error) {
-            console.error('Error loading contact data:', error);
-            // Fallback to config.js
-            if (window.SITE) {
-                document.getElementById('adminEmail').value = window.SITE.email || '';
-                document.getElementById('adminPhone').value = window.SITE.phoneDisplay || '';
-                document.getElementById('adminLinkedin').value = window.SITE.linkedin || '';
-                document.getElementById('adminGithub').value = window.SITE.github || '';
-            }
-        }
-    }
-    
-    async function saveContact() {
-        const email = document.getElementById('adminEmail').value;
-        const phone = document.getElementById('adminPhone').value;
-        const linkedin = document.getElementById('adminLinkedin').value;
-        const github = document.getElementById('adminGithub').value;
-        
-        const contactData = { email, phone, linkedin, github };
-        
-        try {
-            await apiCall('/contact', 'POST', contactData);
-            alert('Informations de contact mises à jour !');
-        } catch (error) {
-            console.error('Error saving contact:', error);
-            alert('Erreur lors de l\'enregistrement');
-        }
+    // Contact Management
+    function loadContactData() {
+        const contactData = loadData('contactData', defaultContactData);
+        document.getElementById('adminEmail').value = contactData.email;
+        document.getElementById('adminPhone').value = contactData.phone;
+        document.getElementById('adminLinkedin').value = contactData.linkedin;
+        document.getElementById('adminGithub').value = contactData.github;
     }
 
-    // Projects management
-    async function loadProjects() {
-        try {
-            const projects = await apiCall('/projects');
-            const container = document.getElementById('projectsList');
-            
-            if (projects.length === 0) {
-                container.innerHTML = '<p>Aucun projet pour le moment.</p>';
-                return;
-            }
-            
-            container.innerHTML = projects.map(project => `
-                <div class="ue-list-item" style="display:flex; justify-content:space-between; align-items:center;">
-                    <div>
-                        <strong>${project.title}</strong>
-                        <br><small style="color:var(--muted);">${project.category} · ${project.tags.join(', ')}</small>
-                    </div>
-                    <div style="display:flex; gap:8px;">
-                        <button class="btn-save" style="padding:6px 12px; font-size:11px;" onclick="editProject(${project.id})">Modifier</button>
-                        <button class="btn-cancel" style="padding:6px 12px; font-size:11px;" onclick="deleteProject(${project.id})">Supprimer</button>
-                    </div>
-                </div>
-            `).join('');
-        } catch (error) {
-            console.error('Error loading projects:', error);
-            document.getElementById('projectsList').innerHTML = '<p>Erreur lors du chargement des projets.</p>';
-        }
-    }
-    
-    function showProjectForm() {
-        document.getElementById('projectForm').style.display = 'block';
-        document.getElementById('projectFormTitle').textContent = 'Ajouter un projet';
-        document.getElementById('projectFormElement').reset();
-        document.getElementById('projectId').value = '';
-    }
-    
-    function hideProjectForm() {
-        document.getElementById('projectForm').style.display = 'none';
-        document.getElementById('projectFormElement').reset();
-    }
-    
-    async function editProject(id) {
-        try {
-            const project = await apiCall(`/projects/${id}`);
-            document.getElementById('projectForm').style.display = 'block';
-            document.getElementById('projectFormTitle').textContent = 'Modifier le projet';
-            document.getElementById('projectId').value = project.id;
-            document.getElementById('projectTitle').value = project.title;
-            document.getElementById('projectDescription').value = project.description;
-            document.getElementById('projectImageUrl').value = project.image_url || '';
-            document.getElementById('projectTags').value = project.tags.join(', ');
-            document.getElementById('projectLinkUrl').value = project.link_url || '';
-            document.getElementById('projectCategory').value = project.category;
-            document.getElementById('projectOrderIndex').value = project.order_index;
-        } catch (error) {
-            console.error('Error loading project:', error);
-            alert('Erreur lors du chargement du projet');
-        }
-    }
-    
-    async function saveProject() {
-        const id = document.getElementById('projectId').value;
-        const data = {
-            title: document.getElementById('projectTitle').value,
-            description: document.getElementById('projectDescription').value,
-            image_url: document.getElementById('projectImageUrl').value,
-            tags: document.getElementById('projectTags').value.split(',').map(t => t.trim()).filter(t => t),
-            link_url: document.getElementById('projectLinkUrl').value,
-            category: document.getElementById('projectCategory').value,
-            order_index: parseInt(document.getElementById('projectOrderIndex').value)
+    function saveContact() {
+        const contactData = {
+            email: document.getElementById('adminEmail').value,
+            phone: document.getElementById('adminPhone').value,
+            linkedin: document.getElementById('adminLinkedin').value,
+            github: document.getElementById('adminGithub').value
         };
-        
-        try {
-            if (id) {
-                await apiCall(`/projects/${id}`, 'PUT', data);
-            } else {
-                await apiCall('/projects', 'POST', data);
-            }
-            alert('Projet enregistré !');
-            hideProjectForm();
-            loadProjects();
-        } catch (error) {
-            console.error('Error saving project:', error);
-            alert('Erreur lors de l\'enregistrement');
-        }
+        saveData('contactData', contactData);
+        alert('Informations de contact enregistrées !');
     }
-    
-    async function deleteProject(id) {
-        if (!confirm('Êtes-vous sûr de vouloir supprimer ce projet ?')) return;
-        
-        try {
-            await apiCall(`/projects/${id}`, 'DELETE');
-            alert('Projet supprimé !');
-            loadProjects();
-        } catch (error) {
-            console.error('Error deleting project:', error);
-            alert('Erreur lors de la suppression');
-        }
-    }
-    
-    // Skills management
-    async function loadSkills() {
-        try {
-            const skills = await apiCall('/skills');
-            const container = document.getElementById('skillsList');
-            
-            if (skills.length === 0) {
-                container.innerHTML = '<p>Aucune compétence pour le moment.</p>';
-                return;
-            }
-            
-            container.innerHTML = skills.map(skill => `
-                <div class="ue-list-item" style="display:flex; justify-content:space-between; align-items:center;">
-                    <div>
-                        <strong>${skill.name}</strong>
-                        <br><small style="color:var(--muted);">${skill.category} · Niveau: ${skill.level}%</small>
-                    </div>
-                    <div style="display:flex; gap:8px;">
-                        <button class="btn-save" style="padding:6px 12px; font-size:11px;" onclick="editSkill(${skill.id})">Modifier</button>
-                        <button class="btn-cancel" style="padding:6px 12px; font-size:11px;" onclick="deleteSkill(${skill.id})">Supprimer</button>
-                    </div>
-                </div>
-            `).join('');
-        } catch (error) {
-            console.error('Error loading skills:', error);
-            document.getElementById('skillsList').innerHTML = '<p>Erreur lors du chargement des compétences.</p>';
-        }
-    }
-    
-    function showSkillForm() {
-        document.getElementById('skillForm').style.display = 'block';
-        document.getElementById('skillFormTitle').textContent = 'Ajouter une compétence';
-        document.getElementById('skillFormElement').reset();
-        document.getElementById('skillId').value = '';
-    }
-    
-    function hideSkillForm() {
-        document.getElementById('skillForm').style.display = 'none';
-        document.getElementById('skillFormElement').reset();
-    }
-    
-    async function editSkill(id) {
-        try {
-            const skill = await apiCall(`/skills/${id}`);
-            document.getElementById('skillForm').style.display = 'block';
-            document.getElementById('skillFormTitle').textContent = 'Modifier la compétence';
-            document.getElementById('skillId').value = skill.id;
-            document.getElementById('skillName').value = skill.name;
-            document.getElementById('skillCategory').value = skill.category;
-            document.getElementById('skillLevel').value = skill.level;
-            document.getElementById('skillOrderIndex').value = skill.order_index;
-        } catch (error) {
-            console.error('Error loading skill:', error);
-            alert('Erreur lors du chargement de la compétence');
-        }
-    }
-    
-    async function saveSkill() {
-        const id = document.getElementById('skillId').value;
-        const data = {
-            name: document.getElementById('skillName').value,
-            category: document.getElementById('skillCategory').value,
-            level: parseInt(document.getElementById('skillLevel').value),
-            order_index: parseInt(document.getElementById('skillOrderIndex').value)
-        };
-        
-        try {
-            if (id) {
-                await apiCall(`/skills/${id}`, 'PUT', data);
-            } else {
-                await apiCall('/skills', 'POST', data);
-            }
-            alert('Compétence enregistrée !');
-            hideSkillForm();
-            loadSkills();
-        } catch (error) {
-            console.error('Error saving skill:', error);
-            alert('Erreur lors de l\'enregistrement');
-        }
-    }
-    
-    async function deleteSkill(id) {
-        if (!confirm('Êtes-vous sûr de vouloir supprimer cette compétence ?')) return;
-        
-        try {
-            await apiCall(`/skills/${id}`, 'DELETE');
-            alert('Compétence supprimée !');
-            loadSkills();
-        } catch (error) {
-            console.error('Error deleting skill:', error);
-            alert('Erreur lors de la suppression');
-        }
-    }
-    
-    // Parcours management
-    async function loadParcours() {
-        try {
-            const parcours = await apiCall('/parcours');
-            const container = document.getElementById('parcoursList');
-            
-            if (parcours.length === 0) {
-                container.innerHTML = '<p>Aucune étape de parcours pour le moment.</p>';
-                return;
-            }
-            
-            container.innerHTML = parcours.map(item => `
-                <div class="ue-list-item" style="display:flex; justify-content:space-between; align-items:center;">
-                    <div>
-                        <strong>${item.year}</strong> — ${item.title}
-                        <br><small style="color:var(--muted);">${item.institution} · ${item.type}</small>
-                    </div>
-                    <div style="display:flex; gap:8px;">
-                        <button class="btn-save" style="padding:6px 12px; font-size:11px;" onclick="editParcours(${item.id})">Modifier</button>
-                        <button class="btn-cancel" style="padding:6px 12px; font-size:11px;" onclick="deleteParcours(${item.id})">Supprimer</button>
-                    </div>
-                </div>
-            `).join('');
-        } catch (error) {
-            console.error('Error loading parcours:', error);
-            document.getElementById('parcoursList').innerHTML = '<p>Erreur lors du chargement du parcours.</p>';
-        }
-    }
-    
-    function showParcoursForm() {
-        document.getElementById('parcoursForm').style.display = 'block';
-        document.getElementById('parcoursFormTitle').textContent = 'Ajouter une étape';
-        document.getElementById('parcoursFormElement').reset();
-        document.getElementById('parcoursId').value = '';
-    }
-    
-    function hideParcoursForm() {
-        document.getElementById('parcoursForm').style.display = 'none';
-        document.getElementById('parcoursFormElement').reset();
-    }
-    
-    async function editParcours(id) {
-        try {
-            const item = await apiCall(`/parcours/${id}`);
-            document.getElementById('parcoursForm').style.display = 'block';
-            document.getElementById('parcoursFormTitle').textContent = 'Modifier l\'étape';
-            document.getElementById('parcoursId').value = item.id;
-            document.getElementById('parcoursYear').value = item.year;
-            document.getElementById('parcoursTitle').value = item.title;
-            document.getElementById('parcoursDescription').value = item.description || '';
-            document.getElementById('parcoursInstitution').value = item.institution || '';
-            document.getElementById('parcoursType').value = item.type;
-            document.getElementById('parcoursOrderIndex').value = item.order_index;
-        } catch (error) {
-            console.error('Error loading parcours item:', error);
-            alert('Erreur lors du chargement de l\'étape');
-        }
-    }
-    
-    async function saveParcours() {
-        const id = document.getElementById('parcoursId').value;
-        const data = {
-            year: document.getElementById('parcoursYear').value,
-            title: document.getElementById('parcoursTitle').value,
-            description: document.getElementById('parcoursDescription').value,
-            institution: document.getElementById('parcoursInstitution').value,
-            type: document.getElementById('parcoursType').value,
-            order_index: parseInt(document.getElementById('parcoursOrderIndex').value)
-        };
-        
-        try {
-            if (id) {
-                await apiCall(`/parcours/${id}`, 'PUT', data);
-            } else {
-                await apiCall('/parcours', 'POST', data);
-            }
-            alert('Étape enregistrée !');
-            hideParcoursForm();
-            loadParcours();
-        } catch (error) {
-            console.error('Error saving parcours item:', error);
-            alert('Erreur lors de l\'enregistrement');
-        }
-    }
-    
-    async function deleteParcours(id) {
-        if (!confirm('Êtes-vous sûr de vouloir supprimer cette étape ?')) return;
-        
-        try {
-            await apiCall(`/parcours/${id}`, 'DELETE');
-            alert('Étape supprimée !');
-            loadParcours();
-        } catch (error) {
-            console.error('Error deleting parcours item:', error);
-            alert('Erreur lors de la suppression');
-        }
-    }
-
-    // Statistiques
-    function loadUEStats() {
-        const statsContainer = document.getElementById('ueStats');
-        statsContainer.innerHTML = `
-            <div class="ue-list-item">
-                <strong>INF 1492</strong> — Circuits numériques : 4 crédits
-            </div>
-            <div class="ue-list-item">
-                <strong>INF 1491</strong> — Cryptologie : 3 crédits
-            </div>
-            <div class="ue-list-item">
-                <strong>MTH 1420</strong> — Rech. opér. & analyse num. : 5 crédits
-            </div>
-            <div class="ue-list-item">
-                <strong>INF 1493</strong> — Forensique & ing. sociale : 2 crédits
-            </div>
-            <div class="ue-list-item">
-                <strong>INF 1423</strong> — Algorithmique & SD : 5 crédits
-            </div>
-            <div class="ue-list-item">
-                <strong>INF 1490</strong> — Admin. systèmes d'exploitation : 5 crédits
-            </div>
-            <div class="ue-list-item">
-                <strong>RSI 409</strong> — Sécurité réseaux LAN : 1.5 crédits
-            </div>
-            <div class="ue-list-item">
-                <strong>RSI 411</strong> — Sécurisation services réseau : 1.5 crédits
-            </div>
-            <div class="ue-list-item">
-                <strong>SAESI 401</strong> — SAE intégratrice : 0.5 crédits
-            </div>
-            <div class="ue-list-item">
-                <strong>Stage</strong> — Stage professionnel : 2 crédits
-            </div>
-            <div class="ue-list-item">
-                <strong>PORTSI 4</strong> — Portfolio numérique : 0.5 crédits
-            </div>
-        `;
-    }
-
 </script>
-
 </body>
 </html>
