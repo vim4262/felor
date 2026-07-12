@@ -24,6 +24,79 @@ function verifyToken(event) {
   }
 }
 
+// Initialize database tables (ensure they exist)
+async function initDB() {
+  try {
+    await client.execute(`
+      CREATE TABLE IF NOT EXISTS ue_data (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        ue_code TEXT UNIQUE NOT NULL,
+        title TEXT NOT NULL,
+        credits TEXT NOT NULL,
+        description TEXT,
+        proof TEXT,
+        skills TEXT,
+        bilan TEXT,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+    
+    await client.execute(`
+      CREATE TABLE IF NOT EXISTS contact_data (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        email TEXT,
+        phone TEXT,
+        linkedin TEXT,
+        github TEXT,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+    
+    await client.execute(`
+      CREATE TABLE IF NOT EXISTS projects (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL,
+        description TEXT,
+        image_url TEXT,
+        tags TEXT,
+        link_url TEXT,
+        category TEXT,
+        order_index INTEGER DEFAULT 0,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+    
+    await client.execute(`
+      CREATE TABLE IF NOT EXISTS skills (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        category TEXT,
+        level INTEGER DEFAULT 50,
+        order_index INTEGER DEFAULT 0,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+    
+    await client.execute(`
+      CREATE TABLE IF NOT EXISTS parcours (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        year TEXT NOT NULL,
+        title TEXT NOT NULL,
+        description TEXT,
+        institution TEXT,
+        type TEXT,
+        order_index INTEGER DEFAULT 0,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+  } catch (error) {
+    console.error('Database initialization error:', error);
+  }
+}
+
 // GET all UE data
 async function getUEData() {
   const result = await client.execute('SELECT * FROM ue_data ORDER BY ue_code');
@@ -282,6 +355,9 @@ async function deleteParcoursItem(id) {
 
 // Main handler
 exports.handler = async (event) => {
+  // Initialize database
+  await initDB();
+  
   const decoded = verifyToken(event);
   
   // Extract action from path
@@ -410,6 +486,14 @@ exports.handler = async (event) => {
   
   if (event.httpMethod === 'POST' || event.httpMethod === 'PUT' || event.httpMethod === 'DELETE') {
     const body = event.body ? JSON.parse(event.body) : {};
+    
+    // Add error handling for JSON parsing
+    if (event.body && !body) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: 'Invalid JSON in request body' })
+      };
+    }
     
     if (resource === 'api' && action === 'ue') {
       await saveUEData(body.code, body);
