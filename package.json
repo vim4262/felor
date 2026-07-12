@@ -5,12 +5,7 @@
   "main": "index.html",
   "scripts": {
     "dev": "python -m http.server 8080",
-    "dev-alt": "npx serve .",
-    "build": "node scripts/build.js",
-    "deploy": "netlify deploy --prod",
-    "deploy-preview": "netlify deploy",
-    "test": "node scripts/test.js",
-    "lint": "node scripts/lint.js"
+    "dev-alt": "npx serve ."
   },
   "keywords": [
     "portfolio",
@@ -21,14 +16,8 @@
   ],
   "author": "EKOE Félicio",
   "license": "MIT",
-  "devDependencies": {
-    "netlify-cli": "^17.0.0"
-  },
-  "dependencies": {
-    "@libsql/client": "^0.4.0",
-    "bcrypt": "^5.1.1",
-    "jsonwebtoken": "^9.0.2"
-  },
+  "devDependencies": {},
+  "dependencies": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/ekoe-felicio/portfolio-ekoe-s4"
