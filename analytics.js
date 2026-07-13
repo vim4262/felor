@@ -9,7 +9,7 @@
 class PortfolioAnalytics {
   constructor() {
     this.enabled = true;
-    this.plausibleDomain = 'foliofelo.netlify.app'; // Remplacer par votre domaine
+    this.plausibleDomain = 'verte1.netlify.app'; // Remplacer par votre domaine
     this.init();
   }
 
