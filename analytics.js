@@ -9,7 +9,7 @@
 class PortfolioAnalytics {
   constructor() {
     this.enabled = true;
-    this.plausibleDomain = 'portfolio-ekoe-s4.vercel.app'; // Remplacer par votre domaine
+    this.plausibleDomain = 'foliofelo.netlify.app'; // Remplacer par votre domaine
     this.init();
   }
 
