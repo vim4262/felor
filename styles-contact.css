@@ -1,0 +1,17 @@
+/* ============================================================
+   STYLES SPÉCIFIQUES — PAGE CONTACT
+   Formulaire, coordonnées, liens sociaux
+   (Le footer et la nav de page sont déjà stylés globalement
+   par styles-main.css — pas de redéfinition ici.)
+   ============================================================ */
+
+.contact-links {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+  .contact-links { justify-content: center; }
+}

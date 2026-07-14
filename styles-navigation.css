@@ -1,0 +1,196 @@
+/* ============================================================
+   NAVIGATION ET HEADER
+   Barre de navigation, topbar, menu mobile
+   ============================================================ */
+
+/* ============ TOPBAR DOSSIER ============ */
+.case-bar {
+  background: var(--ink);
+  color: #d7e0ff;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--accent);
+}
+
+.case-bar .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 32px;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.case-bar .blink {
+  color: var(--accent);
+  animation: blink 1.2s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0.25; }
+}
+
+/* ============ NAVIGATION : ONGLETS DE CLASSEUR ============ */
+nav#navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(7, 9, 16, 0.72);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--line);
+  transition: background var(--t-med) var(--ease), box-shadow var(--t-med) var(--ease);
+}
+
+nav#navbar.scrolled {
+  background: rgba(7, 9, 16, 0.92);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.nav-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.nav-logo {
+  font-family: var(--display);
+  font-size: 14px;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  transition: color var(--t-fast) var(--ease);
+}
+
+.nav-logo:hover { color: var(--accent); }
+
+.nav-logo .ref {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--muted);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+.tab-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 100%;
+}
+
+.tab {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 10px 16px 8px;
+  border: 1px solid var(--line);
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  background: rgba(21, 25, 40, 0.6);
+  position: relative;
+  top: 1px;
+  transition: color var(--t-fast) var(--ease), background var(--t-fast) var(--ease),
+              border-color var(--t-fast) var(--ease);
+  text-decoration: none;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.tab:hover {
+  color: #ffffff;
+  background: var(--paper3);
+}
+
+.tab.active {
+  background: rgba(15, 18, 30, 0.95);
+  color: var(--accent);
+  border-color: var(--line-accent);
+  font-weight: 700;
+  box-shadow: 0 -2px 12px rgba(45, 212, 191, 0.14);
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--bg);
+}
+
+.nav-bottom-rule {
+  border-bottom: 1px solid var(--line2);
+}
+
+/* ============ MENU MOBILE ============ */
+.menu-btn {
+  display: none;
+  background: none;
+  border: 1px solid var(--line2);
+  border-radius: var(--r);
+  width: 36px;
+  height: 36px;
+  font-size: 16px;
+  color: var(--ink2);
+  cursor: pointer;
+  transition: border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+  min-height: 36px;
+  min-width: 36px;
+}
+
+.menu-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  border-top: 1px solid var(--line2);
+  padding: 10px 32px 18px;
+  background: rgba(9, 11, 19, 0.97);
+}
+
+.mobile-menu a {
+  font-family: var(--mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 12px 0;
+  border-bottom: 1px dashed var(--line2);
+  color: var(--text);
+  transition: color var(--t-fast) var(--ease);
+  text-decoration: none;
+}
+
+.mobile-menu a:hover { color: var(--accent); }
+
+.mobile-menu.open { display: flex; }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+  .tab-row { display: none; }
+
+  .menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-inner { padding: 0 16px; }
+
+  .case-bar .wrap { padding: 7px 16px; }
+}

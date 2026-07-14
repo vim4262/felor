@@ -1,0 +1,126 @@
+/* ============================================================
+   STYLES SPÉCIFIQUES — PAGE COMPÉTENCES
+   Cartes UE, preuves, détails
+   ============================================================ */
+
+.evi-card {
+  position: relative;
+  padding: 20px;
+  background: var(--paper);
+  border: 1.5px solid var(--line2);
+  border-radius: 6px;
+  transition: border-color var(--t-med) var(--ease), transform var(--t-med) var(--ease),
+              box-shadow var(--t-med) var(--ease);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.evi-card:hover {
+  border-color: var(--line-accent);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-3px);
+}
+
+.evi-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+
+.evi-code {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.evi-title {
+  font-family: var(--head);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.evi-body { margin-bottom: 12px; flex-grow: 1; }
+
+.evi-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+/* .evi-proof déplacée vers styles-components.css (utilisée aussi
+   sur projets.html) */
+
+/* ============ UE DETAIL ============ */
+.evi-detail {
+  display: none;
+  padding-top: 16px;
+  border-top: 1px dashed var(--line);
+  margin-top: 12px;
+  animation: unfold 0.35s var(--ease-soft);
+}
+
+.evi-card.open .evi-detail { display: block; }
+
+@keyframes unfold {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ue-field { margin-bottom: 12px; }
+.ue-field:last-child { margin-bottom: 0; }
+
+.ue-field-k {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.ue-field-v {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+/* ============ UE FOOTER ============ */
+.evi-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  background: rgba(45, 212, 191, 0.04);
+  border-top: 1px solid var(--line2);
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink2);
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.evi-foot:hover { background: rgba(45, 212, 191, 0.1); color: var(--accent); }
+.evi-card.open .evi-foot { background: rgba(45, 212, 191, 0.1); color: var(--accent); }
+.evi-card.open .evi-foot:hover { background: rgba(45, 212, 191, 0.15); }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 900px) {
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .grid-3 { grid-template-columns: 1fr; }
+  .evi-top { flex-direction: column; }
+}

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parcours & bilan — EKOE Félicio S4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@500;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles-variables.css">
+<link rel="stylesheet" href="styles-base.css">
+<link rel="stylesheet" href="styles-components.css">
+<link rel="stylesheet" href="styles-navigation.css">
+<link rel="stylesheet" href="styles-main.css">
+<link rel="stylesheet" href="styles-parcours.css">
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js" defer></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js');
+    });
+  }
+</script>
+<meta name="description" content="Parcours académique et bilan du Semestre 4 de EKOE Félicio — Licence Pro Sécurité Informatique ESIG.">
+<meta property="og:title" content="Parcours & Bilan — Portfolio EKOE S4">
+<meta name="theme-color" content="#09090B">
+</head>
+<body>
+
+<noscript>
+<style>
+  .reveal-on-load, .reveal-line, .fade-up, .fade-in, .scale-in, .slide-left, .slide-right, .zoom-in {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+</style>
+</noscript>
+
+<canvas id="particles" aria-hidden="true"></canvas>
+
+<a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+<div class="case-bar">
+  <div class="wrap">
+    <span>Portfolio N° EKOE-S4-2026 <span class="blink">_</span></span>
+    <span>Folio 04/05</span>
+  </div>
+</div>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">EKOE<span class="ref">/S4</span></a>
+    <div class="tab-row">
+      <a href="index.html" class="tab">Accueil</a>
+      <a href="competences.html" class="tab">Compétences</a>
+      <a href="projets.html" class="tab">Projets</a>
+      <a href="parcours.html" class="tab active">Parcours</a>
+      <a href="contact.html" class="tab">Contact</a>
+    </div>
+    <button id="menuBtn" class="menu-btn" aria-label="Menu">☰</button>
+  </div>
+  <div id="mobileMenu" class="mobile-menu">
+    <a href="index.html">Accueil</a>
+    <a href="competences.html">Compétences</a>
+    <a href="projets.html">Projets</a>
+    <a href="parcours.html">Parcours</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+<div class="nav-bottom-rule"></div>
+
+<header class="cover cover-page" id="main-content">
+  <div class="cover-orbs" aria-hidden="true">
+    <span class="orb orb-1"></span>
+    <span class="orb orb-2"></span>
+  </div>
+  <div class="cover-grid-bg" aria-hidden="true"></div>
+  <div class="wrap page-header fade-up">
+    <div class="cover-ref">Analyse réflexive · S4</div>
+    <h1 class="page-title">Parcours <span class="gradient-text">bilan</span></h1>
+    <p class="cover-sub">Ma formation, ce que j'ai développé et mon bilan du S4.</p>
+  </div>
+</header>
+
+<main>
+<section class="section section-tight">
+  <div class="wrap wrap-narrow">
+
+    <div class="fade-up">
+      <div class="s-ref">Formation académique</div>
+      <h2 class="s-title" style="font-size:clamp(1.2rem,2.5vw,1.6rem); margin-bottom:20px;">Timeline<br>scolaire</h2>
+    </div>
+
+    <div class="timeline-card glass-card fade-up slide-left">
+      <div class="dl-item">
+        <div class="dl-year">2025–26</div>
+        <div>
+          <span class="stamp stamp-live" style="margin-bottom:6px;">En cours</span>
+          <div class="dl-title">Licence 2 Pro Sécurité Informatique S4, ESIG Global Success</div>
+          <div class="dl-desc">Réseaux Cryptologie Admin. SE Forensique SAESI401.</div>
+        </div>
+      </div>
+      <div class="dl-item">
+        <div class="dl-year">2024–25</div>
+        <div>
+          <div class="dl-title">Licence 1 Pro Sécurité Informatique ESIG Global Success</div>
+          <div class="dl-desc">Fondamentaux réseaux, systèmes, programmation, bases de données.</div>
+        </div>
+      </div>
+      <div class="dl-item">
+        <div class="dl-year">2023–24</div>
+        <div>
+          <div class="dl-title">Institut Confucius — Chinois niveau 3, Université de Lomé</div>
+          <div class="dl-desc">Poursuite de l'apprentissage du mandarin.</div>
+        </div>
+      </div>
+      <div class="dl-item">
+        <div class="dl-year">2021–23</div>
+        <div>
+          <div class="dl-title">Licence Économie de Développement (FASEG) & Chinois N1-N2</div>
+          <div class="dl-desc">Université de Lomé — Institut Confucius.</div>
+        </div>
+      </div>
+      <div class="dl-item" style="border-bottom:none;">
+        <div class="dl-year">2020–21</div>
+        <div>
+          <div class="dl-title">Baccalauréat Scientifique, série D</div>
+          <div class="dl-desc">Lycée Vic-Intelligentsia.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fade-up" style="margin-top:32px;">
+      <div class="id-card glass-card" style="text-align:center;">
+        <div class="id-card-head"><span><iconify-icon icon="lucide:file-text" width="14"></iconify-icon> Documents</span></div>
+        <p style="margin-bottom:16px;">Téléchargez mon CV complet avec toutes mes expériences et formations.</p>
+        <a href="https://esigtogo-my.sharepoint.com/:b:/g/personal/felicio_ekoe_etu_esig_tg/IQBk8Gv0q2MBTa5bTCMAV6bWAYt92YTij4iP-7pHo-wQohE?e=hyQQhm" target="_blank" rel="noopener" class="btn btn-glow" style="display:inline-flex;align-items:center;">
+          <iconify-icon icon="lucide:download" width="16" style="margin-right:8px;"></iconify-icon>
+          Télécharger mon CV
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="fade-up section-head">
+      <div class="s-ref">Parcours atypique</div>
+      <h2 class="s-title">Pourquoi la<br>cybersécurité ?</h2>
+    </div>
+    <div class="mission-card glass-card fade-up slide-right">
+      <p class="mission-sub" style="max-width:100%; margin:0;">
+        Après l'économie et des années de chinois, j'ai décidé de suivre ma passion pour la tech
+        en me tournant vers la sécurité info. C'était un gros changement, mais ça m'a appris la rigueur,
+        l'autonomie et la persévérance — des qualités qui servent tous les jours en cybersécurité,
+        pour sécuriser un réseau, admin un système ou analyser une trace.
+      </p>
+    </div>
+    <div class="grid-4 fade-up stagger-group qualities-grid">
+      <div class="bil glass-card">
+        <div class="bil-h"><iconify-icon icon="lucide:search" width="16"></iconify-icon> Rigueur</div>
+        <p>Approche méthodique sur les labs, la doc et les livrables S4.</p>
+      </div>
+      <div class="bil glass-card">
+        <div class="bil-h"><iconify-icon icon="lucide:zap" width="16"></iconify-icon> Autonomie</div>
+        <p>Labs GNS3/VMware résolus en autodidactie.</p>
+      </div>
+      <div class="bil glass-card">
+        <div class="bil-h"><iconify-icon icon="lucide:users" width="16"></iconify-icon> Leadership</div>
+        <p>Chef de projet sur le support PowerShell.</p>
+      </div>
+      <div class="bil glass-card">
+        <div class="bil-h"><iconify-icon icon="lucide:heart" width="16"></iconify-icon> Passion</div>
+        <p>Projets perso : ChainCacao, ce portfolio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="perforation"></div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="fade-up section-head">
+      <div class="s-ref">Bilan du Semestre 4</div>
+      <h2 class="s-title">Auto-évaluation<br>& perspectives</h2>
+      <p class="s-intro">Au début du semestre je pensais approfondir un domaine précis, mais j'ai touché à un peu de tout —
+        réseaux, cryptologie, admin systèmes, forensique — et c'est ce qui m'a le plus servi : je vois
+        maintenant les liens entre ces matières, alors qu'avant je les voyais séparées. C'est cette vue d'ensemble
+        qui m'a donné envie d'aller plus loin, surtout en forensique.</p>
+    </div>
+
+    <div class="grid-2 fade-up stagger-group">
+      <div class="bil glass-card">
+        <div class="bil-h success"><iconify-icon icon="lucide:check-circle" width="16"></iconify-icon> Succès</div>
+        <p>Le lab FortiGate/GNS3, ma fierté du semestre — pas juste parce qu'il marche, mais parce_que j'ai dû comprendre pourquoi il marchait pas, plusieurs fois, avant d'y arriver, et documenter chaque étape pour que quelqu'un d'autre puisse le reproduire.</p>
+      </div>
+      <div class="bil glass-card">
+        <div class="bil-h horizon"><iconify-icon icon="lucide:trending-up" width="16"></iconify-icon> Horizons</div>
+        <p>Les premiers CTF m'ont donné le goût du pentesting bien plus qu'un cours théorique. Je veux maintenant en faire une pratique régulière, pas juste une découverte de semestre.</p>
+      </div>
+      <div class="bil glass-card">
+        <div class="bil-h diff"><iconify-icon icon="lucide:alert-triangle" width="16"></iconify-icon> Difficultés</div>
+        <p>La virtualisation imbriquée (VMware + GNS3) m'a donné du fil à retordre : plusieurs fois j'ai cru avoir un problème réseau alors que c'était pas assez de ressources. Comprendre la différence m'a pris du temps, mais m'a appris à mieux diagnostiquer avant de conclure trop vite.</p>
+      </div>
+      <div class="bil glass-card">
+        <div class="bil-h improve"><iconify-icon icon="lucide:refresh-cw" width="16"></iconify-icon> À améliorer</div>
+        <p>Je documente encore trop souvent après coup, une fois le problème résolu — alors que les détails utiles, comme l'erreur exacte ou l'ordre des tentatives, sont déjà à moitié oubliés. C'est le réflexe que je veux prendre au prochain semestre : noter en temps réel, même si ça ralentit sur le moment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section cta-band">
+  <div class="wrap fade-up">
+    <div class="cta-inner glass-card">
+      <div class="cta-glow" aria-hidden="true"></div>
+      <div>
+        <div class="s-ref">Projection</div>
+        <h2 class="s-title" style="margin-bottom:8px;">Analyste en<br>Forensique Numérique</h2>
+        <p class="s-intro" style="margin:0;">Identifier, comprendre et contrer les cyberattaques en exploitant les traces dans les SI.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="contact.html" class="btn btn-glow"><iconify-icon icon="lucide:send" width="16"></iconify-icon> Me contacter</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <nav class="page-nav-bar" aria-label="Navigation entre pages">
+      <a href="projets.html" class="page-nav-link"><iconify-icon icon="lucide:arrow-left" width="14"></iconify-icon> Projets</a>
+      <a href="contact.html" class="page-nav-link">Contact <iconify-icon icon="lucide:arrow-right" width="14"></iconify-icon></a>
+    </nav>
+    <div class="footer-bottom">
+      <span class="folio">Portfolio <b>EKOE-S4-2026</b> — Folio 04/05</span>
+      <div class="footer-links"><a href="index.html">Accueil</a></div>
+    </div>
+  </div>
+</footer>
+
+<button id="scrollTop" class="scroll-top" aria-label="Retour en haut" title="Retour en haut">
+  <iconify-icon icon="lucide:arrow-up" width="18"></iconify-icon>
+</button>
+
+<script src="config.js"></script>
+<script src="main.js" defer></script>
+<script src="analytics.js" defer></script>
+</body>
+</html>
