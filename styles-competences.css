@@ -11,6 +11,9 @@
   border-radius: 6px;
   transition: border-color var(--t-med) var(--ease), transform var(--t-med) var(--ease),
               box-shadow var(--t-med) var(--ease);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .evi-card:hover {
@@ -43,7 +46,7 @@
   color: var(--text);
 }
 
-.evi-body { margin-bottom: 12px; }
+.evi-body { margin-bottom: 12px; flex-grow: 1; }
 
 .evi-desc {
   font-size: 14px;
